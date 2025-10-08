@@ -20,11 +20,8 @@ export default function Home() {
                 <img 
                   src="/images/profile-photo.jpg" 
                   alt="Shiv Shankar Tiwari - Meditating by the river" 
-                  className="relative w-24 h-24 md:w-36 md:h-36 rounded-full border-2 md:border-4 border-white shadow-2xl ring-2 md:ring-4 ring-accent/10 object-cover"
+                  className="relative w-24 h-24 md:w-36 md:h-36 rounded-full border-2 md:border-4 border-white shadow-2xl object-cover"
                 />
-                <div className="absolute -bottom-2 -right-2 md:-bottom-3 md:-right-3 w-6 h-6 md:w-10 md:h-10 bg-gradient-to-r from-accent to-accent-dark rounded-full flex items-center justify-center shadow-lg">
-                  <span className="text-white text-xs md:text-lg">🧘‍♂️</span>
-                </div>
               </div>
             </div>
             
@@ -73,52 +70,11 @@ export default function Home() {
                   </p>
                   <p className="text-sm text-muted-foreground leading-relaxed">
                     When you&apos;re the only developer and the product needs to ship tomorrow, you learn to move fast and break things (then fix them). 
-                    I&apos;ve built apps that serve millions of users, led engineering teams, and somehow kept my sanity through meditation and good coffee. ☕
+                    I&apos;ve built apps that serve millions of users, led engineering teams, and somehow kept my sanity through meditation and good coffee.
                   </p>
                 </div>
               </div>
               
-              <div className="grid md:grid-cols-2 gap-6">
-                <div className="bg-white/80 rounded-2xl p-6 border border-gray-200/50 shadow-sm hover:shadow-md transition-all duration-300">
-                  <div className="mb-4">
-                    <h3 className="text-lg font-semibold text-foreground mb-2">Tech Stack</h3>
-                    <p className="text-sm text-muted-foreground">The tools I actually use daily</p>
-                  </div>
-                  <div className="space-y-2">
-                    <div className="flex flex-wrap gap-1.5">
-                      <span className="px-3 py-1.5 bg-gray-100 text-gray-700 rounded-full text-xs font-medium">React Native</span>
-                      <span className="px-3 py-1.5 bg-gray-100 text-gray-700 rounded-full text-xs font-medium">Flutter</span>
-                      <span className="px-3 py-1.5 bg-gray-100 text-gray-700 rounded-full text-xs font-medium">Node.js</span>
-                    </div>
-                    <div className="flex flex-wrap gap-1.5">
-                      <span className="px-3 py-1.5 bg-gray-100 text-gray-700 rounded-full text-xs font-medium">TypeScript</span>
-                      <span className="px-3 py-1.5 bg-gray-100 text-gray-700 rounded-full text-xs font-medium">AWS</span>
-                      <span className="px-3 py-1.5 bg-gray-100 text-gray-700 rounded-full text-xs font-medium">Docker</span>
-                    </div>
-                  </div>
-                </div>
-                
-                <div className="bg-white/80 rounded-2xl p-6 border border-gray-200/50 shadow-sm hover:shadow-md transition-all duration-300">
-                  <div className="mb-4">
-                    <h3 className="text-lg font-semibold text-foreground mb-2">Impact Metrics</h3>
-                    <p className="text-sm text-muted-foreground">Real numbers from real projects</p>
-                  </div>
-                  <div className="space-y-3">
-                    <div className="flex items-center justify-between">
-                      <span className="text-sm text-muted-foreground">Deployment Speed</span>
-                      <span className="text-base font-semibold text-foreground">90% faster</span>
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <span className="text-sm text-muted-foreground">Crash Rate</span>
-                      <span className="text-base font-semibold text-foreground">30% less</span>
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <span className="text-sm text-muted-foreground">Users Served</span>
-                      <span className="text-base font-semibold text-foreground">Millions</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
         </section>
@@ -199,34 +155,6 @@ export default function Home() {
               </p>
             </div>
             
-            {/* One Man Army Hero Image */}
-            <div className="relative rounded-3xl overflow-hidden shadow-2xl group">
-              <img 
-                src="/images/epic-warrior.jpg" 
-                alt="One Man Army - Startup Warrior" 
-                className="w-full h-96 md:h-[500px] object-cover transition-transform duration-700 group-hover:scale-105"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/60 to-black/20"></div>
-              <div className="absolute bottom-8 left-8 right-8">
-                <div className="space-y-4">
-                  <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center border border-white/30">
-                      <span className="text-white text-xl">⚔️</span>
-                    </div>
-                    <div>
-                      <h3 className="text-3xl md:text-4xl font-bold text-white mb-1 drop-shadow-2xl">
-                        One Man Army
-                      </h3>
-                      <p className="text-white text-sm uppercase tracking-wider font-medium drop-shadow-lg">The startup battlefield</p>
-                    </div>
-                  </div>
-                  <p className="text-white text-lg leading-relaxed max-w-2xl font-medium drop-shadow-xl">
-                    When you&apos;re the only developer and the product needs to ship tomorrow, you learn to move fast and break things (then fix them). 
-                    This is where legends are made.
-                  </p>
-                </div>
-              </div>
-            </div>
             
             <div className="grid md:grid-cols-3 gap-6 md:gap-8">
               <div className="bg-white/80 rounded-2xl p-6 md:p-8 border border-gray-200/50 shadow-sm hover:shadow-md transition-all duration-300">
@@ -300,7 +228,7 @@ export default function Home() {
                       <a href="mailto:pythonsst@gmail.com" className="px-8 py-3 bg-foreground text-white rounded-xl font-medium hover:bg-foreground/90 transition-colors duration-300">
                         Let&apos;s Talk
                       </a>
-                      <a href="/resume" className="px-8 py-3 border border-foreground text-foreground rounded-xl font-medium hover:bg-foreground hover:text-white transition-all duration-300">
+                      <a href="/resume" className="px-8 py-3 border-2 border-gray-600 text-gray-700 rounded-xl font-medium hover:bg-gray-600 hover:text-white transition-all duration-300">
                         View Resume
                       </a>
                     </div>
@@ -459,7 +387,7 @@ export default function Home() {
                   © 2025 Shiv Shankar Tiwari
                 </p>
                 <p className="text-sm text-muted-foreground">
-                  Built with Next.js, TypeScript, and lots of coffee ☕
+                  Built with Next.js, TypeScript, and lots of coffee
                 </p>
               </div>
               

@@ -7,6 +7,30 @@ export default function BlogPost() {
       <Navigation />
       <main className="pt-20">
         <article className="max-w-4xl mx-auto px-6 py-16">
+          {/* Top Navigation */}
+          <div className="mb-8 pb-6 border-b border-gray-200">
+            <div className="flex justify-between items-center">
+              <Link 
+                href="/" 
+                className="flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors duration-300"
+              >
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                </svg>
+                <span className="text-sm font-medium">Back to Home</span>
+              </Link>
+              
+              <div className="flex items-center gap-4">
+                <Link 
+                  href="/blog/scaling-mobile-apps-100k-downloads" 
+                  className="text-sm text-gray-600 hover:text-gray-900 transition-colors duration-300"
+                >
+                  Next Article →
+                </Link>
+              </div>
+            </div>
+          </div>
+
           <header className="mb-12">
             <div className="flex items-center gap-3 text-sm text-muted-foreground mb-6">
               <span>January 15, 2025</span>
@@ -143,12 +167,33 @@ export default function BlogPost() {
               </div>
             </div>
 
-            <div className="mt-12 pt-8 border-t border-border">
-              <p className="text-sm text-muted-foreground">
-                <strong>About the Author:</strong> Shiv Shankar Tiwari is a polyglot Software Engineer with over six years of experience building high-performance applications across mobile, web, and backend systems. 
-                He specializes in React Native, Flutter, Node.js, TypeScript, and AWS cloud technologies, and has led engineering teams at multiple successful startups.
-              </p>
+            {/* Article Navigation */}
+            <div className="mt-16 pt-8 border-t border-gray-200">
+              <div className="flex justify-between items-center gap-4">
+                {/* Previous Article */}
+                <Link 
+                  href="/blog/startup-technical-leadership" 
+                  className="flex items-center gap-3 px-6 py-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors duration-300"
+                >
+                  <svg className="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                  </svg>
+                  <span className="text-gray-700 font-medium">Previous</span>
+                </Link>
+
+                {/* Next Article */}
+                <Link 
+                  href="/blog/startup-technical-leadership" 
+                  className="flex items-center gap-3 px-6 py-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors duration-300"
+                >
+                  <span className="text-gray-700 font-medium">Next</span>
+                  <svg className="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </Link>
+              </div>
             </div>
+
           </div>
         </article>
       </main>
