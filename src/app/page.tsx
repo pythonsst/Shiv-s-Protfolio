@@ -332,7 +332,7 @@ export default function Home() {
         </section>
 
         {/* YouTube Video Section */}
-        <section className="max-w-6xl mx-auto px-4 md:px-6 py-16 md:py-24">
+        {/* <section className="max-w-6xl mx-auto px-4 md:px-6 py-16 md:py-24">
           <div className="space-y-8 md:space-y-12">
             <div className="text-center">
               <div className="inline-flex items-center gap-3 mb-6">
@@ -368,7 +368,7 @@ export default function Home() {
               </p>
             </div>
           </div>
-        </section>
+        </section> */}
 
         {/* Footer */}
         <footer className="border-t border-border/50 mt-16 md:mt-32">
