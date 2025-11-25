@@ -10,9 +10,9 @@ export const experiences: ExperienceItemProps[] = [
     location: "Enterprise FinTech",
     period: "Jul 2024 – Present",
     bullets: [
-      "Architected CI/CD & observability to reduce deployment time by 90% and improve recovery time.",
-      "Defined security and release standards aligned with SOC2 goals.",
-      "Introduced performance budgets and monitoring to improve app stability metrics.",
+      "Architected CI/CD pipelines and observability — cut deployment time by 90% and reduced MTTR.",
+      "Defined security & release standards to align with SOC2 goals and reduced release rollback incidents.",
+      "Introduced performance budgets and monitoring — improved app stability and reduced crash rate.",
     ],
   },
   {
@@ -24,7 +24,7 @@ export const experiences: ExperienceItemProps[] = [
     period: "Jul 2022 – May 2024",
     bullets: [
       "Led cross-platform apps and in-store checkout supporting 8k+ ATMs and $100M+ transactions.",
-      "Optimized map & locator features — reduced memory by 35% and battery usage by 40%.",
+      "Optimized map & locator — reduced memory usage 35% and battery draw 40%, improving user retention.",
       "Built resilient NestJS services for real-time transaction processing and wallet integrations.",
     ],
   },
@@ -36,8 +36,10 @@ export const experiences: ExperienceItemProps[] = [
     location: "Identity & Wallets",
     period: "Jul 2021 – May 2022",
     bullets: [
-      "Designed secure digital wallet with end-to-end encryption and passwordless sign-ins.",
-      "Built GraphQL APIs improving response times by 50%.",
+      "Designed a secure digital wallet with end-to-end encryption and passwordless sign-ins.",
+      "Built GraphQL APIs and services — improved average response times by 50% and reduced error rates.",
     ],
   },
 ];
+
+export default experiences;
