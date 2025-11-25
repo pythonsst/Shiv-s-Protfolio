@@ -6,7 +6,7 @@ import SkillSection from "@/components/SkillSection";
 import Navigation from "@/components/Navigation";
 import { experiences } from "@/data/experiences";
 import skills from "@/data/skillsData";
-import { contacts } from "@/data/contact";
+import { contacts, profile } from "@/data/contact";
 
 export default function ResumePage() {
   return (
@@ -196,11 +196,9 @@ export default function ResumePage() {
           </div>
 
           <HeroHeader
-            name="Shiv Shankar Tiwari"
-            subtitle="Senior Engineering Manager · Technical Architect"
-            experienceYears="6.5 years of experience"
+            name={profile.name}
+            heroSummary={profile.heroSummary}
             contacts={contacts}
-            heroSummary="I build and lead engineering teams to deliver reliable, high-performance mobile and web products. I combine product focus with technical execution — reducing operational risk, shortening delivery cycles, and improving end-user experience for millions of customers."
           />
           <section className="body" aria-label="Resume body">
             <div>
@@ -231,14 +229,8 @@ export default function ResumePage() {
             </div>
 
             <aside className="sidebar" aria-labelledby="skillsHeading">
-              <h3
-                id="skillsHeading"
-                className="section-title"
-                style={{ marginTop: 0 }}
-              >
-                Core Skills
-              </h3>
-              <SkillSection categories={skills} clamp={9999} />
+             
+          <SkillSection categories={skills} layout="classic" compact={false} />
               <div style={{ marginTop: 12 }}>
                 <div className="section-title" style={{ marginBottom: 8 }}>
                   Selected Projects

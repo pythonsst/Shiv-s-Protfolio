@@ -4,43 +4,102 @@ export type SkillCategory = {
   items: string[];
 };
 
+/**
+ * Trimmed, focused skills for Java / Mobile / Full-stack applications.
+ * - Removed overly-verbose or duplicate entries
+ * - Added Tools & Platforms (Android Studio, Xcode, Play Store, Reactotron, Flipper)
+ * - Kept categories compact and ATS-friendly
+ */
 const skills: SkillCategory[] = [
   {
+    title: "Languages",
+    items: ["Java", "Kotlin", "Swift", "Dart", "JavaScript", "TypeScript", "SQL"],
+  },
+
+  {
+    title: "Backend — Java",
+    items: [
+      "Spring Boot",
+      "Spring Data (JPA / Hibernate)",
+      "Spring Security",
+      "Microservices",
+      "Maven",
+      "Gradle",
+      "JUnit",
+      "Mockito",
+    ],
+  },
+
+  {
+    title: "Backend — Node.js / JS",
+    items: ["Node.js", "Express.js", "NestJS", "GraphQL", "gRPC"],
+  },
+
+  {
     title: "Frontend",
-    items: ["React.js", "React Native", "TypeScript", "Next.js", "Redux Toolkit", "Hooks", "Modular UI"],
+    items: ["React.js", "Next.js", "TypeScript", "Redux Toolkit"],
   },
+
   {
-    title: "Backend",
-    items: ["Node.js", "Express.js", "NestJS", "Java", "Spring Boot", "Kotlin Microservices"],
+    title: "Mobile",
+    items: [
+      "Android (Kotlin)",
+      "iOS (Swift)",
+      "Flutter (Dart)",
+      "React Native",
+      "Fastlane",
+    ],
   },
-  {
-    title: "Architecture",
-    items: ["Microservices", "Event-Driven Systems", "DDD", "Modular Monoliths"],
-  },
-  {
-    title: "APIs",
-    items: ["REST", "GraphQL", "gRPC"],
-  },
+
   {
     title: "Cloud & DevOps",
-    items: ["AWS (ECS, Lambda, API Gateway, RDS, DynamoDB, S3)", "Terraform", "AWS CDK", "Jenkins", "GitHub Actions", "Bitrise", "Fastlane"],
+    items: [
+      "AWS (ECS, Lambda, RDS, S3)",
+      "Terraform",
+      "Docker",
+      "Kubernetes",
+      "CI/CD (GitHub Actions, Jenkins)",
+    ],
   },
-  {
-    title: "Messaging & Events",
-    items: ["Kafka", "AWS SQS", "SNS", "EventBridge"],
-  },
-  {
-    title: "Testing",
-    items: ["Jest", "Detox", "Selenium", "Playwright", "Postman"],
-  },
+
   {
     title: "Databases",
-    items: ["PostgreSQL", "MySQL", "MongoDB", "DynamoDB", "Firebase"],
+    items: ["PostgreSQL", "MySQL", "MongoDB", "Redis"],
   },
+
   {
-    title: "Practices",
-    items: ["CI/CD", "Clean Architecture", "Performance Optimization", "Observability"],
+    title: "Messaging & Events",
+    items: ["Kafka", "AWS SQS", "SNS"],
   },
+
+  {
+    title: "Testing & QA",
+    items: ["JUnit", "Mockito", "Jest", "Playwright", "Postman"],
+  },
+
+  {
+    title: "Tools & Platforms",
+    items: [
+      "Android Studio",
+      "Xcode",
+      "Google Play Console",
+      "App Store Connect",
+      "Reactotron",
+      "Flipper",
+      "Crashlytics",
+      "Bitrise",
+      "Fastlane",
+      "IntelliJ IDEA",
+      "VS Code",
+      "Git",
+    ],
+  },
+
+  {
+    title: "Practices & Architecture",
+    items: ["Clean Architecture", "Event-Driven Systems", "Performance Optimization", "Observability"],
+  },
+
   {
     title: "Soft Skills",
     items: ["Technical Leadership", "System Design", "Mentoring", "Cross-Functional Collaboration"],

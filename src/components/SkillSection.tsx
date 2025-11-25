@@ -7,15 +7,82 @@ import { SkillCategory } from "@/data/skillsData";
 interface SkillSectionProps {
   categories: SkillCategory[];
   clamp?: number; // number of pills to show before "show more" per category (0 = show all)
+  layout?: "pills" | "classic"; // "pills" = current badges, "classic" = compact comma separated lines
+  compact?: boolean; // visual compactness for classic mode
 }
 
-export default function SkillSection({ categories, clamp = 6 }: SkillSectionProps) {
+export default function SkillSection({
+  categories,
+  clamp = 6,
+  layout = "pills",
+  compact = false,
+}: SkillSectionProps) {
   const [expanded, setExpanded] = React.useState<Record<string, boolean>>({});
 
   const toggle = (key: string) => {
     setExpanded((s) => ({ ...s, [key]: !s[key] }));
   };
 
+  // Render classic grouped comma-separated lines
+  if (layout === "classic") {
+    return (
+      <section aria-labelledby="skillsHeading" className={`skill-section classic ${compact ? "compact" : ""}`}>
+        <h2 id="skillsHeading" className="skills-heading">Technical Skills</h2>
+
+        <div className="classic-list">
+          {categories.map((cat) => {
+            const items = cat.items ?? [];
+            if (!items || items.length === 0) return null;
+            return (
+              <div key={cat.title} className="classic-group" aria-label={`${cat.title} skills`}>
+                <div className="classic-title">{cat.title}:</div>
+                <div className="classic-line">{items.join(", ")}</div>
+              </div>
+            );
+          })}
+        </div>
+
+        <style jsx>{`
+          .skill-section { padding: 0; }
+          .skills-heading {
+            font-size: 16px;
+            font-weight: 700;
+            margin: 0 0 10px 0;
+            color: var(--title, #0b1220);
+          }
+
+          .classic-list { display: flex; flex-direction: column; gap: ${compact ? "8px" : "12px"}; }
+
+          .classic-group { display: block; }
+
+          .classic-title {
+            font-weight: 700;
+            font-size: ${compact ? "13px" : "14px"};
+            margin-bottom: ${compact ? "2px" : "4px"};
+            color: var(--title, #0b1220);
+          }
+
+          .classic-line {
+            font-size: ${compact ? "12.25px" : "13px"};
+            color: #15272b;
+            line-height: 1.5;
+            margin: 0;
+            /* keep lines wrapping sensibly */
+            word-break: break-word;
+          }
+
+          /* Visual spacing to match a printed resume */
+          @media print {
+            .skills-heading { font-size: 13pt; }
+            .classic-title { font-size: 11pt; }
+            .classic-line { font-size: 10.5pt; color: #000; }
+          }
+        `}</style>
+      </section>
+    );
+  }
+
+  // ---- default: pills layout (existing behavior, slightly refactored) ----
   return (
     <section aria-labelledby="skillsHeading" className="skill-section">
       <h2 id="skillsHeading" className="skills-heading">Core Skills</h2>
