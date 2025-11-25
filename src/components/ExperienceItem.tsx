@@ -1,3 +1,4 @@
+// src/components/ExperienceItem.tsx
 "use client";
 
 import React from "react";
@@ -19,13 +20,14 @@ export interface ExperienceItemProps {
 }
 
 /**
- * Reusable ExperienceItem component
- * - spacing: controls density (compact | normal | spacious)
- * - periodPosition: "right" places dates on the right; "below" places dates under the title (good for narrow layouts)
- *
- * Usage:
- * <ExperienceItem {...exp} spacing="compact" periodPosition="right" />
+ * Minimal sanitizer: allow only <strong>, <b>, <em>, <i> tags.
+ * Removes any other tags (prevents scripts and other unsafe markup).
  */
+function sanitizeHTML(raw: string) {
+  if (!raw) return "";
+  return raw.replace(/<(?!\/?(strong|b|em|i)\b)[^>]*>/gi, "");
+}
+
 export default function ExperienceItem({
   id,
   title,
@@ -35,7 +37,8 @@ export default function ExperienceItem({
   period,
   bullets = [],
   spacing = "normal",
-  periodPosition = "right",
+  // default to "below" so header is two-line (meta on line 1, period on line 2)
+  periodPosition = "below",
   className,
 }: ExperienceItemProps) {
   const presets = {
@@ -67,34 +70,49 @@ export default function ExperienceItem({
 
   const cssVars = presets[spacing];
 
+  // Build first-line text: Title · Org — Location
+  // Keep org as clickable when orgUrl is present.
+  const metaParts = [];
+  if (org) metaParts.push(org);
+  if (location) metaParts.push(location);
+
   return (
     <article id={id} className={`exp ${className ?? ""}`} style={cssVars as React.CSSProperties}>
-      <div className={`row period-${periodPosition}`}>
-        <div className="left">
+      {/* HEADER: first line contains title, second line contains period (by default) */}
+      <div className="header">
+        <div className="line1">
           <h3 className="title">{title}</h3>
 
-          <div className="orgBlock">
+          <div className="meta">
             {orgUrl ? (
               <a href={orgUrl} target="_blank" rel="noreferrer" className="org">
                 {org}
               </a>
             ) : (
-              <div className="org">{org}</div>
+              <span className="org">{org}</span>
             )}
 
-            {location && <div className="location">{location}</div>}
+            {location && (
+              <>
+                <span className="sep"> — </span>
+                <span className="location">{location}</span>
+              </>
+            )}
           </div>
         </div>
 
-        {period && periodPosition === "right" && <div className="period">{period}</div>}
+        {/* show period on the right when periodPosition === 'right' */}
+        {period && periodPosition === "right" && <div className="period period-right">{period}</div>}
       </div>
 
-      {period && periodPosition === "below" && <div className="period-below">{period}</div>}
+      {/* period below (default) */}
+      {period && periodPosition === "below" && <div className="period period-below">{period}</div>}
 
+      {/* responsibilities */}
       {bullets.length > 0 && (
         <ul className="bullets" aria-label={`${title} — responsibilities`}>
           {bullets.map((b, i) => (
-            <li key={i}>{b}</li>
+            <li key={i} dangerouslySetInnerHTML={{ __html: sanitizeHTML(b) }} />
           ))}
         </ul>
       )}
@@ -105,40 +123,46 @@ export default function ExperienceItem({
           padding: 0;
         }
 
-        .row {
+        /* Header wrapper */
+        .header {
           display: flex;
           align-items: flex-start;
           justify-content: space-between;
           gap: 12px;
+          flex-wrap: wrap;
         }
 
-        /* Support period below layout */
-        .row.period-below {
+        /* Line 1: title + meta (kept together) */
+        .line1 {
+          display: flex;
           flex-direction: column;
-        }
-
-        .left {
+          gap: 6px;
           min-width: 0;
         }
 
         .title {
-          margin: 0 0 4px 0;
+          margin: 0;
           font-size: var(--title-size);
           font-weight: 700;
           color: #0b1220;
           line-height: 1.05;
         }
 
-        .orgBlock {
-          display: flex;
-          flex-direction: column;
-          gap: 4px;
+        /* meta on same visual "line" as title block (but below title text) */
+        .meta {
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
+          font-size: var(--org-size);
+          color: #374151;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
         }
 
         .org {
           color: #2563eb;
           font-weight: 600;
-          font-size: var(--org-size);
           text-decoration: none;
         }
 
@@ -146,13 +170,17 @@ export default function ExperienceItem({
           text-decoration: underline;
         }
 
-        .location {
-          font-size: var(--meta-size);
+        .sep {
           color: #6b7280;
         }
 
+        .location {
+          color: #6b7280;
+          font-weight: 500;
+        }
+
+        /* Period - when right, keep it aligned to the header right */
         .period {
-          flex: 0 0 auto;
           color: #6b7280;
           font-size: var(--meta-size);
           align-self: center;
@@ -160,10 +188,16 @@ export default function ExperienceItem({
           margin-left: 12px;
         }
 
+        .period-right {
+          margin-left: 12px;
+        }
+
+        /* Period below (second line) */
         .period-below {
           margin-top: 6px;
           font-size: var(--meta-size);
           color: #6b7280;
+          width: 100%;
         }
 
         .bullets {
@@ -173,45 +207,46 @@ export default function ExperienceItem({
           color: #26323f;
           line-height: var(--line-height);
           font-size: var(--bullet-size);
+          list-style: none;
         }
 
         .bullets li {
           margin-bottom: 8px;
+          position: relative;
+          padding-left: 14px;
         }
 
-        /* Responsive: on narrow containers, ensure stacked layout and reduce gaps */
+        .bullets li::before {
+          content: "";
+          position: absolute;
+          left: 0;
+          top: 8px;
+          width: 5px;
+          height: 5px;
+          background: linear-gradient(135deg, #5b6bff, #8e4bff);
+          border-radius: 50%;
+        }
+
         @media (max-width: 720px) {
-          .row {
-            flex-direction: column;
-            gap: 6px;
+          .header {
+            display: block;
           }
-
-          .period {
-            margin-left: 0;
-            align-self: flex-start;
+          .meta {
+            white-space: normal;
+            overflow: visible;
+          }
+          .period-below {
+            margin-top: 6px;
           }
         }
 
-        /* Print adjustments (keeps density controlled) */
         @media print {
-          .exp {
-            margin-bottom: calc(var(--gap-v));
-          }
-          .title {
-            font-size: calc(var(--title-size));
-          }
           .org {
-            font-size: calc(var(--org-size));
-            color: #000;
-            text-decoration: none;
+            color: #000 !important;
+            text-decoration: none !important;
           }
-          .period,
-          .period-below {
-            color: #333;
-          }
-          .bullets {
-            font-size: calc(var(--bullet-size));
-            line-height: var(--line-height);
+          .bullets li::before {
+            background: #000;
           }
         }
       `}</style>

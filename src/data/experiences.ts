@@ -4,40 +4,49 @@ import type { ExperienceItemProps } from "@/components/ExperienceItem";
 export const experiences: ExperienceItemProps[] = [
   {
     id: "validus",
-    title: "Deputy Manager — Mobile Engineering",
+    title: "Deputy Manager — Mobile & Front-End Engineering",
     org: "Validus Fintech Services Pvt Ltd",
     orgUrl: "https://validusfintech.com",
-    location: "Enterprise FinTech",
+    location: "Hyderabad, India",
     period: "Jul 2024 – Present",
     bullets: [
-      "Architected CI/CD pipelines and observability — cut deployment time by 90% and reduced MTTR.",
-      "Defined security & release standards to align with SOC2 goals and reduced release rollback incidents.",
-      "Introduced performance budgets and monitoring — improved app stability and reduced crash rate.",
+      "Architected a white-label investment platform managing over <strong>500 crore INR</strong> AUM across web and mobile.",
+      "Designed reusable component libraries and modular front-end systems enabling multi-team scalability.",
+      "Improved application startup time by <strong>35 percent</strong> through bundle optimization and performance tuning.",
+      "Implemented real-time investor dashboards and feature modules supporting high traffic and scale.",
+      "Automated CI/CD pipelines using GitHub Actions and Fastlane, reducing release cycles by <strong>40 percent</strong>.",
+      "Led mobile and front-end engineering, driving code quality, architecture decisions, and performance improvements."
     ],
   },
+
   {
     id: "bitcoindepot",
-    title: "Senior Mobile App Engineer",
+    title: "Senior React Native / Front-End Engineer",
     org: "Bitcoin Depot — Atlanta, USA",
     orgUrl: "https://bitcoindepot.com",
-    location: "Retail & Payments",
-    period: "Jul 2022 – May 2024",
+    location: "Remote",
+    period: "Aug 2022 – Jun 2024",
     bullets: [
-      "Led cross-platform apps and in-store checkout supporting 8k+ ATMs and $100M+ transactions.",
-      "Optimized map & locator — reduced memory usage 35% and battery draw 40%, improving user retention.",
-      "Built resilient NestJS services for real-time transaction processing and wallet integrations.",
+      "Migrated legacy React Native codebase to Hooks and TypeScript, improving stability and maintainability.",
+      "Integrated crypto payment processing with Simplex, contributing to <strong>100 percent</strong> revenue growth.",
+      "Built secure wallet transaction workflows and authentication layers using Web3 APIs.",
+      "Optimized Google Maps rendering, reducing memory usage by <strong>28 percent</strong> and improving UI responsiveness.",
+      "Lowered crash rates by <strong>40 percent</strong> through automated testing, profiling, and quality improvements."
     ],
   },
+
   {
     id: "affinidi",
     title: "Full Stack Engineer",
     org: "Affinidi — Bangalore, India",
     orgUrl: "https://affinidi.com",
-    location: "Identity & Wallets",
-    period: "Jul 2021 – May 2022",
+    location: "Bangalore, India",
+    period: "Aug 2021 – May 2022",
     bullets: [
-      "Designed a secure digital wallet with end-to-end encryption and passwordless sign-ins.",
-      "Built GraphQL APIs and services — improved average response times by 50% and reduced error rates.",
+      "Developed decentralized identity applications using React Native with DID-based authentication.",
+      "Improved client runtime performance by <strong>25 percent</strong> through Hermes tuning and resource optimization.",
+      "Built GraphQL APIs and backend services, improving response times by <strong>50 percent</strong> and reducing errors.",
+      "Collaborated with blockchain engineering teams to deliver secure credential verification workflows."
     ],
   },
 ];

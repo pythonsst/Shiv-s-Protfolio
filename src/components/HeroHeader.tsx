@@ -42,39 +42,56 @@ function labelForContact(c: ContactItem) {
   const { href, text } = c;
   if (isLinkedin(href, text)) return "LinkedIn";
   if (isGithub(href, text)) return "GitHub";
-  if (isMail(href, text) || isPhone(href, text) || isLocation(text)) return text;
+  if (isMail(href, text) || isPhone(href, text) || isLocation(text))
+    return text;
   return text;
 }
 
-/** highlight years inside summary */
-function renderSummaryWithHighlight(rawSummary?: string, yearsProp?: number | string) {
+/**
+ * Sanitize a small set of allowed inline tags and return sanitized HTML.
+ * Allowed tags: <strong>, <b>, <em>, <i>
+ * All other tags will be stripped.
+ */
+function sanitizeAllowInline(raw: string) {
+  if (!raw) return "";
+  // Remove any tags that are not in whitelist
+  return raw.replace(/<(?!\/?(strong|b|em|i)\b)[^>]*>/gi, "");
+}
+
+/**
+ * Render hero summary with optional years appended.
+ * Accepts HTML snippets (limited to allowed tags) and renders via dangerouslySetInnerHTML.
+ */
+function renderSummaryWithHighlight(
+  rawSummary?: string,
+  yearsProp?: number | string
+) {
   if (!rawSummary && !yearsProp) return null;
 
   let summary = rawSummary ? String(rawSummary).trim() : "";
-  const yearsStr = yearsProp !== undefined ? String(yearsProp).trim() : "";
+  const yearsStr =
+    yearsProp !== undefined && yearsProp !== null
+      ? String(yearsProp).trim()
+      : "";
 
+  // If years provided and not already present in text, append it (wrapped in <strong>)
   const yearsTokenRegex = /(\d+(\.\d+)?\s*(?:yrs?|years?|yr\.?))/i;
   if (yearsStr && !yearsTokenRegex.test(summary)) {
-    summary = summary ? `${summary} · ${yearsStr} years` : `${yearsStr} years`;
+    summary = summary
+      ? `${summary} · <strong>${yearsStr} years</strong>`
+      : `<strong>${yearsStr} years</strong>`;
   }
 
-  const splitRegex = /(\d+(?:\.\d+)?\s*(?:yrs?|years?|yr\.?))/gi;
-  const tokens = summary.split(splitRegex).filter((t) => t !== undefined && t !== "");
+  // sanitize (allow small set of tags)
+  const sanitized = sanitizeAllowInline(summary);
 
   return (
-    <div className="summary-pill" role="note">
-      {tokens.map((t, idx) => {
-        if (splitRegex.test(t)) {
-          splitRegex.lastIndex = 0;
-          return (
-            <span key={idx} className="years" aria-label={`${t} experience`}>
-              {t}
-            </span>
-          );
-        }
-        return <span key={idx}>{t}</span>;
-      })}
-    </div>
+    <div
+      className="summary-pill"
+      role="note"
+      // safe because we sanitize and only allow <strong>, <b>, <em>, <i>
+      dangerouslySetInnerHTML={{ __html: sanitized }}
+    />
   );
 }
 
@@ -93,18 +110,26 @@ export default function HeroHeader({
           margin-bottom: 14px;
         }
 
-        .hero.center { text-align: center; }
-        .hero.left { text-align: left; }
+        .hero.center {
+          text-align: left;
+        }
+        .hero.left {
+          text-align: left;
+        }
 
-        /* tightened clamp to avoid huge headers on wide screens */
+        /* Name: larger and scales correctly on wide/narrow screens */
         .name {
           font-family: "Source Serif Pro", Georgia, serif;
-          font-size: clamp(22px, 2.4vw, 34px); /* less aggressive scaling */
-          font-weight: 700;
+          font-size: clamp(30px, 5vw, 40px);
+          font-weight: 600;
           margin: 0 0 6px 0;
           letter-spacing: -0.02em;
           color: var(--text, #0b1220);
           line-height: 1.02;
+
+          /* NEW → center only the name */
+          text-align: center;
+          width: 100%;
         }
 
         .subtitle {
@@ -131,7 +156,9 @@ export default function HeroHeader({
           font-size: 14px;
         }
 
-        .hero.left .contact-row { justify-content: flex-start; }
+        .hero.left .contact-row {
+          justify-content: flex-start;
+        }
 
         .contact-item {
           display: inline-flex;
@@ -142,39 +169,90 @@ export default function HeroHeader({
           font-weight: 500;
         }
 
-        .contact-link { color: #374151; text-decoration: none; }
-        .contact-link:hover, .contact-link:focus { color: var(--accent, #2f6fe6); text-decoration: underline; }
+        .contact-link {
+          color: #374151;
+          text-decoration: none;
+        }
+        .contact-link:hover,
+        .contact-link:focus {
+          color: var(--accent, #2f6fe6);
+          text-decoration: underline;
+        }
 
-        .contact-icon { display: inline-flex; align-items: center; justify-content: center; color: #4b5563; margin-top: -1px; }
+        .contact-icon {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          color: #4b5563;
+          margin-top: -1px;
+        }
 
-        .dot { display: inline-block; width: 6px; height: 6px; background: #e9edf2; border-radius: 50%; margin: 0 8px; }
+        .dot {
+          display: inline-block;
+          width: 6px;
+          height: 6px;
+          background: #e9edf2;
+          border-radius: 50%;
+          margin: 0 8px;
+        }
 
-        .contact-row { flex-wrap: nowrap; overflow: visible; }
+        .contact-row {
+          flex-wrap: nowrap;
+          overflow: visible;
+        }
         @media (max-width: 920px) {
-          .contact-row { flex-wrap: wrap; justify-content: center; gap: 10px; }
-          .hero.left .contact-row { justify-content: flex-start; }
+          .contact-row {
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+          }
+          .hero.left .contact-row {
+            justify-content: flex-start;
+          }
         }
 
         .summary-pill {
           margin-top: 10px;
           display: inline-block;
-          background: linear-gradient(180deg, rgba(47,111,230,0.03), rgba(47,111,230,0.01));
-          border: 1px solid rgba(47,111,230,0.05);
+          background: linear-gradient(
+            180deg,
+            rgba(47, 111, 230, 0.03),
+            rgba(47, 111, 230, 0.01)
+          );
+          border: 1px solid rgba(47, 111, 230, 0.05);
           padding: 12px 14px;
           border-radius: 8px;
           color: #172634;
           font-size: 15px;
           line-height: 1.55;
           text-align: center;
-          max-width: 920px; /* prevent extremely long single-line summary */
+          max-width: 920px;
           width: min(92%, 920px);
         }
 
-        .hero.center .summary-pill { margin-left: auto; margin-right: auto; display: block; text-align: center; }
+        .summary-pill strong,
+        .summary-pill b {
+          color: var(--accent, #2f6fe6);
+          font-weight: 700;
+        }
+
+        .hero.center .summary-pill {
+          margin-left: auto;
+          margin-right: auto;
+          display: block;
+          text-align: center;
+        }
 
         @media print {
-          .summary-pill { background: transparent !important; border: none !important; color: #111 !important; }
-          .contact-link { color: #111 !important; text-decoration: none !important; }
+          .summary-pill {
+            background: transparent !important;
+            border: none !important;
+            color: #111 !important;
+          }
+          .contact-link {
+            color: #111 !important;
+            text-decoration: none !important;
+          }
         }
       `}</style>
 
@@ -187,12 +265,16 @@ export default function HeroHeader({
             const label = labelForContact(c) ?? c.text;
             const icon = iconForContact(c);
             const href = c.href;
-            const showShortLabel = isLinkedin(href, c.text) || isGithub(href, c.text);
+            const showShortLabel =
+              isLinkedin(href, c.text) || isGithub(href, c.text);
 
             return (
               <React.Fragment key={`${label}-${idx}`}>
                 <div className="contact-item" role="listitem">
-                  <span className="contact-icon" aria-hidden>{icon}</span>
+                  <span className="contact-icon" aria-hidden>
+                    {icon}
+                  </span>
+
                   {href ? (
                     <a
                       className="contact-link"
@@ -208,7 +290,10 @@ export default function HeroHeader({
                     <span>{label}</span>
                   )}
                 </div>
-                {idx < contacts.length - 1 && <span className="dot" aria-hidden />}
+
+                {idx < contacts.length - 1 && (
+                  <span className="dot" aria-hidden />
+                )}
               </React.Fragment>
             );
           })}
