@@ -28,13 +28,7 @@ export default function Navigation() {
 
               {/* Desktop Navigation - Enhanced Clickable Style */}
               <div className="hidden md:flex items-center space-x-8">
-                <Link
-                  href="/"
-                  className="text-muted-foreground hover:text-accent transition-colors font-medium px-3 py-2 rounded-md hover:bg-accent/5 relative group"
-                >
-                  Writing
-                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-accent transition-all duration-200 group-hover:w-full"></span>
-                </Link>
+
                 <Link
                   href="/resume"
                   className="text-muted-foreground hover:text-accent transition-colors font-medium px-3 py-2 rounded-md hover:bg-accent/5 relative group"
@@ -42,6 +36,14 @@ export default function Navigation() {
                   Resume
                   <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-accent transition-all duration-200 group-hover:w-full"></span>
                 </Link>
+                <Link
+                  href="/"
+                  className="text-muted-foreground hover:text-accent transition-colors font-medium px-3 py-2 rounded-md hover:bg-accent/5 relative group"
+                >
+                  Writing
+                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-accent transition-all duration-200 group-hover:w-full"></span>
+                </Link>
+                
               </div>
 
           {/* Mobile menu button */}
