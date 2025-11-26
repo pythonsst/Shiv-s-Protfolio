@@ -134,6 +134,7 @@ export default function HeroHeader({
           line-height: 1.45;
           padding: 0;
           width: 100%;
+          max-width: 85%;
           text-align: left;
         }
 

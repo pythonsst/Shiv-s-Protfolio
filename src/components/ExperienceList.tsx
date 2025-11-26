@@ -177,11 +177,12 @@ function ExperienceItem({ e }: { e: Experience }) {
           position: absolute;
           left: 0;
           top: 10px;
-          width: 8px;
-          height: 8px;
+          width: 5px;
+          height: 5px;
           border-radius: 50%;
           background: #9aa0a6;
         }
+          
 
         /* dashed divider between items will be applied by parent when rendering list */
         /* Responsive: move period under on narrow screens and allow wrapping */
