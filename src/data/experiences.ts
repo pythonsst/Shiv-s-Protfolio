@@ -8,7 +8,7 @@ export const experiences: ExperienceItemProps[] = [
     org: "Validus Fintech Services Pvt Ltd",
     orgUrl: "https://validusfintech.com",
     location: "Hyderabad, India",
-    period: "Jul 2024 – Present",
+    period: "Jul 2024 – Oct 2025",
     bullets: [
       "Architected a white-label investment platform managing over <strong>500 crore INR</strong> AUM across web and mobile.",
       "Designed reusable component libraries and modular front-end systems enabling multi-team scalability.",
@@ -41,7 +41,7 @@ export const experiences: ExperienceItemProps[] = [
     org: "Affinidi — Bangalore, India",
     orgUrl: "https://affinidi.com",
     location: "Bangalore, India",
-    period: "Aug 2021 – May 2022",
+    period: "Aug 2021 – May 2019",
     bullets: [
       "Developed decentralized identity applications using React Native with DID-based authentication.",
       "Improved client runtime performance by <strong>25 percent</strong> through Hermes tuning and resource optimization.",

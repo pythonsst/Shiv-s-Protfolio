@@ -1,125 +1,163 @@
-// src/app/resume/page.tsx  OR wherever your ResumePage was
+// src/app/resume/page.tsx
 "use client";
 
 import React from "react";
 import ResumeHeader from "@/components/ResumeHeader";
-import ExperienceColumn from "@/components/ExperienceColumn";
+import ExperienceColumn from "@/components/ExperienceList";
 import SidebarColumn from "@/components/SidebarColumn";
 import ResumeFooter from "@/components/ResumeFooter";
-import Navigation from "@/components/Navigation"; // still available if needed
+import EducationBlock from "@/components/EducationBlock";
 
 export default function ResumePage() {
   return (
     <>
       <style jsx global>{`
-        /* keep your existing global rules here (unchanged) */
         @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Source+Serif+Pro:wght@600;700&display=swap");
-        :root {
-          --bg: #fbfcfe;
-          --page-bg: #ffffff;
+
+        :root{
+          --font-sans: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial;
+          --font-serif: "Source Serif Pro", Georgia, serif;
           --text: #0b1220;
+          --body: #111827;
           --muted: #6b7280;
-          --accent: #2f6fe6;
-          --divider: rgba(11, 17, 32, 0.06);
-          --max-width: 980px;
+          --accent: #5b21b6;
+          --divider: rgba(11,17,32,0.06);
+          --size-name: 32px;
+          --size-section: 15px;
+          --size-title: 13px;
+          --size-body: 13px;
+          --size-meta: 11.5px;
+          --max-width: 860px;
           --print-page-margin: 8mm;
         }
-        * {
-          box-sizing: border-box;
-          -webkit-print-color-adjust: exact;
-          print-color-adjust: exact;
-        }
-        html,
-        body {
-          margin: 0;
-          padding: 0;
-          height: 100%;
-          background: var(--bg);
-          color: var(--text);
-          font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto,
-            "Helvetica Neue", Arial;
-        }
-        /* Outer wrap — increase top padding so the name isn't hidden by the site header */
-        .wrap {
-          display: flex;
-          justify-content: center;
-          /* bump top padding to account for the fixed nav/header */
-          padding: 110px 18px 48px;
+
+        * { box-sizing: border-box; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; }
+        html,body,#__next { height:100%; }
+        html, body {
+          margin:0; padding:0;
+          font-family: var(--font-sans);
+          font-size: var(--size-body);
+          color: var(--body);
+          background: #ffffff !important;
         }
 
-        .card {
-          width: 100%;
-          max-width: var(--max-width);
-          background: var(--page-bg);
-          padding: 20px 24px;
-          border-radius: 8px;
-          box-shadow: 0 4px 14px rgba(15, 23, 42, 0.05);
+        /* Name */
+        .hero .name {
+          font-family: var(--font-serif);
+          font-size: var(--size-name);
+          font-weight: 600;
+          color: var(--text);
+          margin: 8px 0;
+          line-height: 1.03;
+          text-align: center;
         }
-        .body {
-          display: grid;
-          grid-template-columns: 63% 37%;
-          gap: 22px;
+
+        .summary-pill {
+          font-size: var(--size-body);
+          line-height: 1.45;
+          color: var(--body);
           margin-top: 8px;
-          position: relative;
-          align-items: start;
+          text-align: left;
+          background: transparent !important;
+          border: none !important;
         }
-        .body::before {
-          content: "";
-          position: absolute;
-          left: calc(63% + 10px);
-          top: 0;
-          bottom: 0;
-          width: 1px;
-          background: var(--divider);
+
+        /* Contact row */
+        .contact-row, .contact-item, .contact-link, .contact-icon {
+          font-size: var(--size-meta);
+          color: var(--muted);
         }
-        .section-title {
+
+        /* section titles */
+        .section-title, .skills-heading, .marissa-skill-title {
+          font-size: var(--size-section);
           font-weight: 700;
-          font-size: 15px;
-          margin: 0 0 10px;
-          position: relative;
+          color: var(--text);
+          margin: 0 0 6px;
         }
         .section-title::after {
           content: "";
           position: absolute;
           left: 0;
-          bottom: -8px;
-          width: 40px;
+          bottom: -6px;
+          width: 36px;
           height: 3px;
           border-radius: 2px;
           background: linear-gradient(90deg, var(--accent), #6f8ff8);
         }
-        .jobs {
-          display: flex;
-          flex-direction: column;
-          gap: 14px;
+
+        /* layout */
+        .wrap {
+          display:flex;
+          justify-content:center;
+          padding: 60px 18px 28px;
+        }
+
+        /* FINAL VISUAL BORDER ADDED HERE */
+        .card {
+          width:100%;
+          max-width: var(--max-width);
+          background: #ffffff;
+          padding: 32px;
+          border: 1px solid rgba(11,17,32,0.12);
+          border-radius: 6px;
+        }
+
+        @media print {
+          .card {
+            border: 1px solid #000 !important;
+            padding: 20px !important;
+            border-radius: 0 !important;
+          }
+        }
+
+        .body {
+          display: grid;
+          grid-template-columns: 65% 35%;
+          gap: 18px;
+          position: relative;
+          align-items: start;
           margin-top: 8px;
         }
-        .sidebar {
-          padding: 16px;
-          border-radius: 10px;
-          background: #fafbff;
-          border: 1px solid rgba(47, 111, 230, 0.04);
+
+        .body::before {
+          content: "";
+          position: absolute;
+          left: calc(65% + 8px);
+          top: 0; bottom: 0;
+          width: 1px;
+          background: var(--divider);
         }
-        .footer {
-          margin-top: 18px;
-          color: var(--muted);
-          font-size: 12px;
-        }
+
+        .jobs { display:flex; flex-direction:column; gap: 12px; }
+
+        .exp { padding: 0; margin: 0; }
+        .exp + .exp { border-top: 1px dashed rgba(11,17,32,0.06); padding-top: 12px; margin-top: 12px; }
+
+        .sidebar { padding: 0; }
+        .sidebar .skill-section { padding: 0; }
+        .sidebar .skills-heading { margin-bottom: 10px; }
+
         @media (max-width: 980px) {
-          .wrap {
-            padding: 24px 14px 28px;
-          }
-          .body {
-            grid-template-columns: 1fr;
-          }
-          .body::before {
-            display: none;
-          }
-          .sidebar {
-            background: transparent;
-            padding: 0;
-            border: none;
-          }
+          .wrap { padding: 20px 14px 24px; }
+          .card { padding: 20px; }
+          .body { grid-template-columns: 1fr; }
+          .body::before { display: none; }
+          .hero .name { text-align: left; }
+        }
+          .header-divider {
+  width: 100%;
+  border-bottom: 1px solid rgba(11, 17, 32, 0.08);
+  margin-top: 18px;
+  margin-bottom: 18px;
+}
+
+
+        @media print {
+          @page { margin: var(--print-page-margin); }
+          :root { --accent:#000; --muted:#000; --body:#000; }
+          .wrap { padding: 0; }
+          .body::before { display:none; }
         }
       `}</style>
 
@@ -127,16 +165,18 @@ export default function ResumePage() {
         <article className="card" aria-label="Resume">
           <ResumeHeader />
 
+        {/* Clean thin divider below header */}
+    <div className="header-divider" />
+
+
           <section className="body" aria-label="Resume body">
             <div>
-              {/* Experience column only — hero summary is already at top */}
               <ExperienceColumn />
+              <EducationBlock />
             </div>
 
             <SidebarColumn />
           </section>
-
-          <ResumeFooter />
         </article>
       </div>
     </>

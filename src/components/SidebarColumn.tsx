@@ -16,10 +16,6 @@ export default function SidebarColumn() {
       <div style={{ marginTop: 12 }}>
         <ProjectsList />
       </div>
-
-      <div style={{ marginTop: 14 }}>
-        <EducationBlock />
-      </div>
     </aside>
   );
 }

@@ -18,7 +18,6 @@ export default function ResumeHeader() {
         heroSummary={profile.heroSummary}
         contacts={contacts}
         alignCenter={false}
-
       />
     </header>
   );
