@@ -1,6 +1,7 @@
 // src/components/Typography.tsx
 import React from "react";
 
+
 interface Props { children: React.ReactNode; className?: string; }
 
 export function H1({ children, className = "" }: Props) {

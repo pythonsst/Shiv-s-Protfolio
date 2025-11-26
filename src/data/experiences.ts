@@ -1,7 +1,6 @@
 // data/experiences.ts
-import type { ExperienceItemProps } from "@/components/ExperienceItem";
 
-export const experiences: ExperienceItemProps[] = [
+export const experiences = [
   {
     id: "validus",
     title: "Deputy Manager — Mobile & Front-End Engineering",
