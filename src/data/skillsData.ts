@@ -12,8 +12,30 @@ export type SkillCategory = {
  */
 const skills: SkillCategory[] = [
   {
+    title: "Frontend",
+    items: ["React.js", "Next.js", "TypeScript", "Redux Toolkit"],
+  },
+
+  {
+    title: "Mobile",
+    items: [
+      "React Native",
+      "Android (Kotlin)",
+      "iOS (Swift)",
+      "Flutter (Dart)",
+    ],
+  },
+  {
     title: "Languages",
-    items: ["Java", "Kotlin", "Swift", "Dart", "JavaScript", "TypeScript", "SQL"],
+    items: [
+      "Java",
+      "Kotlin",
+      "Swift",
+      "Dart",
+      "JavaScript",
+      "TypeScript",
+      "SQL",
+    ],
   },
 
   {
@@ -36,29 +58,13 @@ const skills: SkillCategory[] = [
   },
 
   {
-    title: "Frontend",
-    items: ["React.js", "Next.js", "TypeScript", "Redux Toolkit"],
-  },
-
-  {
-    title: "Mobile",
-    items: [
-      "Android (Kotlin)",
-      "iOS (Swift)",
-      "Flutter (Dart)",
-      "React Native",
-      "Fastlane",
-    ],
-  },
-
-  {
     title: "Cloud & DevOps",
     items: [
       "AWS (ECS, Lambda, RDS, S3)",
       "Terraform",
       "Docker",
       "Kubernetes",
-      "CI/CD (GitHub Actions, Jenkins)",
+      "CI/CD (GitHub Actions, Jenkins, Fastlane)",
     ],
   },
 
@@ -97,12 +103,22 @@ const skills: SkillCategory[] = [
 
   {
     title: "Practices & Architecture",
-    items: ["Clean Architecture", "Event-Driven Systems", "Performance Optimization", "Observability"],
+    items: [
+      "Clean Architecture",
+      "Event-Driven Systems",
+      "Performance Optimization",
+      "Observability",
+    ],
   },
 
   {
     title: "Soft Skills",
-    items: ["Technical Leadership", "System Design", "Mentoring", "Cross-Functional Collaboration"],
+    items: [
+      "Technical Leadership",
+      "System Design",
+      "Mentoring",
+      "Cross-Functional Collaboration",
+    ],
   },
 ];
 
