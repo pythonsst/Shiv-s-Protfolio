@@ -3,7 +3,7 @@
 
 import React from "react";
 import Navigation from "@/components/Navigation";
-import HeroHeader from "@/components/HeroHeader";
+import HeroHeader from "@/features/resume/HeroHeader";
 import { contacts, profile } from "@/data/contact";
 
 export default function ResumeHeader() {

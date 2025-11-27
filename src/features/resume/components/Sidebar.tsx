@@ -2,7 +2,7 @@
 "use client";
 
 import React from "react";
-import SkillSection from "@/components/SkillSection";
+import SkillSection from "@/features/resume/components/Skills";
 import skills from "@/data/skillsData";
 import ProjectsList from "@/components/ProjectsList";
 import EducationBlock from "@/components/EducationBlock";

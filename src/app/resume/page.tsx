@@ -2,9 +2,9 @@
 "use client";
 
 import React, { useEffect } from "react";
-import ResumeHeader from "@/components/ResumeHeader";
-import ExperienceColumn from "@/components/ExperienceList";
-import SidebarColumn from "@/components/SidebarColumn";
+import ResumeHeader from "@/features/resume/components/Header";
+import ExperienceColumn from "@/features/resume/components/Experience";
+import SidebarColumn from "@/features/resume/components/Sidebar";
 import EducationBlock from "@/components/EducationBlock";
 
 /**
