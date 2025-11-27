@@ -1,20 +1,64 @@
 // src/app/resume/page.tsx
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import ResumeHeader from "@/components/ResumeHeader";
 import ExperienceColumn from "@/components/ExperienceList";
 import SidebarColumn from "@/components/SidebarColumn";
-import ResumeFooter from "@/components/ResumeFooter";
 import EducationBlock from "@/components/EducationBlock";
 
 export default function ResumePage() {
+  useEffect(() => {
+    let printLink: HTMLLinkElement | null = null;
+
+    function addPrintAssets() {
+      document.documentElement.classList.add("resume-print");
+
+      if (!printLink) {
+        printLink = document.createElement("link");
+        printLink.rel = "stylesheet";
+        printLink.href = "/resume-print.css";
+        // media=print keeps it from applying to screen; browser will load it for print preview
+        printLink.media = "print";
+        printLink.id = "resume-print-link";
+        document.head.appendChild(printLink);
+      }
+
+      // Ensure web fonts are ready before print preview renders
+      try {
+        if ((document as any).fonts && (document as any).fonts.ready) {
+          (document as any).fonts.ready.then(() => void document.body.offsetHeight);
+        }
+      } catch (e) { /* ignore */ }
+    }
+
+    function removePrintAssets() {
+      document.documentElement.classList.remove("resume-print");
+      if (printLink && printLink.parentNode) {
+        printLink.parentNode.removeChild(printLink);
+        printLink = null;
+      }
+    }
+
+    window.addEventListener("beforeprint", addPrintAssets);
+    window.addEventListener("afterprint", removePrintAssets);
+    window.addEventListener("focus", removePrintAssets);
+
+    return () => {
+      window.removeEventListener("beforeprint", addPrintAssets);
+      window.removeEventListener("afterprint", removePrintAssets);
+      window.removeEventListener("focus", removePrintAssets);
+      removePrintAssets();
+    };
+  }, []);
+
   return (
     <>
       <style jsx global>{`
+        /* keep screen styles here unchanged — these are your current styles */
         @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Source+Serif+Pro:wght@600;700&display=swap");
 
-        :root{
+        :root {
           --font-sans: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial;
           --font-serif: "Source Serif Pro", Georgia, serif;
           --text: #0b1220;
@@ -41,7 +85,6 @@ export default function ResumePage() {
           background: #ffffff !important;
         }
 
-        /* Name */
         .hero .name {
           font-family: var(--font-serif);
           font-size: var(--size-name);
@@ -62,13 +105,11 @@ export default function ResumePage() {
           border: none !important;
         }
 
-        /* Contact row */
         .contact-row, .contact-item, .contact-link, .contact-icon {
           font-size: var(--size-meta);
           color: var(--muted);
         }
 
-        /* section titles */
         .section-title, .skills-heading, .marissa-skill-title {
           font-size: var(--size-section);
           font-weight: 700;
@@ -86,29 +127,19 @@ export default function ResumePage() {
           background: linear-gradient(90deg, var(--accent), #6f8ff8);
         }
 
-        /* layout */
         .wrap {
           display:flex;
           justify-content:center;
           padding: 60px 18px 28px;
         }
 
-        /* FINAL VISUAL BORDER ADDED HERE */
         .card {
           width:100%;
           max-width: var(--max-width);
           background: #ffffff;
           padding: 32px;
-          border: 1px solid rgba(11,17,32,0.12);
+          border: 1px solid rgba(11, 17, 32, 0.12);
           border-radius: 6px;
-        }
-
-        @media print {
-          .card {
-            border: 1px solid #000 !important;
-            padding: 20px !important;
-            border-radius: 0 !important;
-          }
         }
 
         .body {
@@ -124,7 +155,8 @@ export default function ResumePage() {
           content: "";
           position: absolute;
           left: calc(65% + 8px);
-          top: 0; bottom: 0;
+          top: 0;
+          bottom: 0;
           width: 1px;
           background: var(--divider);
         }
@@ -132,7 +164,7 @@ export default function ResumePage() {
         .jobs { display:flex; flex-direction:column; gap: 12px; }
 
         .exp { padding: 0; margin: 0; }
-        .exp + .exp { border-top: 1px dashed rgba(11,17,32,0.06); padding-top: 12px; margin-top: 12px; }
+        .exp + .exp { border-top: 1px dashed rgba(11, 17, 32, 0.06); padding-top: 12px; margin-top: 12px; }
 
         .sidebar { padding: 0; }
         .sidebar .skill-section { padding: 0; }
@@ -145,36 +177,33 @@ export default function ResumePage() {
           .body::before { display: none; }
           .hero .name { text-align: left; }
         }
-          .header-divider {
-  width: 100%;
-  border-bottom: 1px solid rgba(11, 17, 32, 0.08);
-  margin-top: 18px;
-  margin-bottom: 18px;
-}
 
+        .header-divider {
+          width: 100%;
+          border-bottom: 1px solid rgba(11, 17, 32, 0.08);
+          margin-top: 18px;
+          margin-bottom: 18px;
+        }
 
+        /* small print-safe defaults retained here but the full print style is in public/resume-print.css */
         @media print {
           @page { margin: var(--print-page-margin); }
-          :root { --accent:#000; --muted:#000; --body:#000; }
+          :root { --accent: #000; --muted: #000; --body: #000; }
           .wrap { padding: 0; }
-          .body::before { display:none; }
+          .body::before { display: none; }
+          .card { border: 1px solid #000 !important; padding: 20px !important; border-radius: 0 !important; }
         }
       `}</style>
 
       <div className="wrap">
         <article className="card" aria-label="Resume">
           <ResumeHeader />
-
-        {/* Clean thin divider below header */}
-    <div className="header-divider" />
-
-
+          <div className="header-divider" />
           <section className="body" aria-label="Resume body">
             <div>
               <ExperienceColumn />
               <EducationBlock />
             </div>
-
             <SidebarColumn />
           </section>
         </article>

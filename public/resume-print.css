@@ -1,0 +1,240 @@
+/* public/resume-print.css
+   Clean, single-source print stylesheet for resume (scoped with html.resume-print)
+*/
+
+@page { size: A4 portrait; margin: 10mm; }
+
+html.resume-print, html.resume-print body, html.resume-print #__next {
+  background: #fff !important;
+  color: #111827 !important;
+  -webkit-print-color-adjust: exact !important;
+  color-adjust: exact !important;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial !important;
+  -webkit-font-smoothing: antialiased !important;
+}
+
+/* Outer wrapper - use full printable width */
+html.resume-print .wrap {
+  padding: 0 !important;
+  margin: 0 auto !important;
+  max-width: 100% !important;
+}
+
+/* Card: remove screen-only visual border; use full width */
+html.resume-print .card {
+  width: 100% !important;
+  max-width: 100% !important;
+  padding: 10px 6mm !important; /* small inner padding to keep content off the page edge */
+  border: none !important;
+  box-shadow: none !important;
+  background: #fff !important;
+  margin: 0 auto !important;
+}
+
+/* Header / nav: hide interactive items and center the hero for print */
+html.resume-print .no-print,
+html.resume-print .menu-button,
+html.resume-print .hamburger,
+html.resume-print .nav-links,
+html.resume-print .header-actions,
+html.resume-print .mobile-only,
+html.resume-print .search,
+html.resume-print .header-right {
+  display: none !important;
+}
+
+/* Hero: center name + summary + contact */
+html.resume-print .hero {
+  text-align: center !important;
+  margin: 6px 0 10px 0 !important;
+  page-break-after: avoid !important;
+}
+html.resume-print .hero .name {
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial !important; /* use sans for print */
+  font-weight: 700 !important;
+  font-size: 26px !important;
+  line-height: 1.06 !important;
+  margin: 0 0 6px 0 !important;
+  color: #0b1220 !important;
+}
+html.resume-print .summary-pill {
+  display: block !important;
+  text-align: center !important;
+  max-width: 980px !important;
+  margin: 0 auto 8px auto !important;
+  font-size: 12.5px !important;
+  line-height: 1.35 !important;
+}
+
+/* Contacts */
+html.resume-print .contact-row {
+  display: flex !important;
+  justify-content: center !important;
+  gap: 12px !important;
+  flex-wrap: wrap !important;
+  margin-bottom: 8px !important;
+}
+html.resume-print .contact-item, html.resume-print .contact-link, html.resume-print .contact-icon {
+  color: #6b7280 !important;
+  font-size: 12px !important;
+}
+
+/* Two-column body using grid (stable for print) */
+html.resume-print .body {
+  display: grid !important;
+  grid-template-columns: 60% 40% !important; /* balanced for A4 */
+  column-gap: 18px !important;
+  row-gap: 8px !important;
+  align-items: start !important;
+  margin-top: 8px !important;
+  position: relative !important;
+}
+
+/* remove screen-only vertical divider */
+html.resume-print .body::before { display: none !important; }
+
+/* LEFT column (experience + education) — full width of left grid cell */
+html.resume-print .body > div:first-child {
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+/* RIGHT column (sidebar) */
+html.resume-print .sidebar {
+  width: 100% !important;
+  box-sizing: border-box !important;
+  padding-left: 6px !important;
+  font-size: 13px !important;
+  line-height: 1.42 !important;
+  color: #111827 !important;
+}
+
+/* Experience section */
+html.resume-print .experience-list .section-title {
+  margin-bottom: 8px !important;
+  text-align: left !important;
+  font-size: 14px !important;
+}
+html.resume-print .jobs { display: block !important; }
+
+/* Each experience item — keep the item intact but allow the list to continue across pages */
+html.resume-print .exp {
+  margin: 0 !important;
+  padding: 8px 0 !important;
+  page-break-inside: avoid !important; /* don't split a single item */
+}
+html.resume-print .exp + .exp {
+  border-top: 1px dashed rgba(0,0,0,0.08) !important;
+  margin-top: 8px !important;
+  padding-top: 10px !important;
+}
+
+/* Header inside each exp */
+html.resume-print .exp .header {
+  display: flex !important;
+  justify-content: space-between !important;
+  gap: 12px !important;
+  align-items: flex-start !important;
+}
+html.resume-print .exp .title { font-size: 15px !important; margin: 0 0 6px 0 !important; font-weight: 700 !important; }
+html.resume-print .org-location { font-size: 12.5px !important; color: #6b7280 !important; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+html.resume-print .org { color: #5b21b6 !important; font-weight: 600 !important; }
+
+/* Period (date) */
+html.resume-print .period { color: #6b7280 !important; font-size: 12.5px !important; white-space: nowrap; }
+
+/* Bullets: denser line height for print */
+html.resume-print .bullets {
+  margin-top: 8px !important;
+  padding-left: 18px !important;
+  margin-bottom: 6px !important;
+  line-height: 1.35 !important;
+  font-size: 12.5px !important;
+  color: #111827 !important;
+  list-style: none !important;
+}
+html.resume-print .bullets li {
+  margin-bottom: 8px !important;
+  position: relative !important;
+  padding-left: 14px !important;
+}
+html.resume-print .bullets li::before {
+  content: "" !important;
+  position: absolute !important;
+  left: 0 !important;
+  top: 9px !important;
+  width: 5px !important;
+  height: 5px !important;
+  border-radius: 50% !important;
+  background: #9aa0a6 !important;
+}
+
+/* Sidebar / Skills: compact and readable */
+html.resume-print .sidebar .skills-heading { font-size: 15px !important; font-weight: 700 !important; margin-bottom: 8px !important; }
+html.resume-print .sidebar .skill-section { margin-bottom: 10px !important; }
+
+/* Skills listing — produce two columns within sidebar when content long */
+html.resume-print .sidebar .skill-list {
+  column-count: 1; /* 1 by default; leave room to change to 2 if needed */
+  column-gap: 12px;
+  -webkit-column-break-inside: avoid;
+  break-inside: avoid;
+}
+
+/* Prevent mid-word splitting and ugly hyphens in skills */
+html.resume-print .sidebar,
+html.resume-print .sidebar * {
+  word-break: normal !important;
+  overflow-wrap: anywhere !important;
+  hyphens: none !important;
+}
+
+/* Small sections (projects, education) */
+html.resume-print .sidebar .selected-projects,
+html.resume-print .education-block {
+  font-size: 13px !important;
+  margin-top: 6px !important;
+}
+
+/* Footer small text */
+html.resume-print .print-footer {
+  font-size: 10px !important;
+  color: rgba(0,0,0,0.6) !important;
+  text-align: left !important;
+  margin-top: 8px !important;
+}
+
+/* Allow the jobs list to split across pages but keep single items intact */
+html.resume-print .jobs,
+html.resume-print .experience-list {
+  page-break-inside: auto !important;
+  break-inside: auto !important;
+}
+
+/* Avoid splitting an individual experience item */
+html.resume-print .exp,
+html.resume-print .bullets,
+html.resume-print .bullets li {
+  page-break-inside: avoid !important;
+  break-inside: avoid !important;
+}
+
+/* Small safety: clear floats (if any) */
+html.resume-print .card::after {
+  content: "" !important;
+  display: table !important;
+  clear: both !important;
+}
+
+/* Optional: make skill lists denser and multi-column on sufficiently wide prints */
+@media print and (min-width: 900px) {
+  html.resume-print .sidebar .skill-list {
+    column-count: 2;
+  }
+}
+
+/* Images / svgs */
+html.resume-print img, html.resume-print svg {
+  max-width: 100% !important;
+  height: auto !important;
+}
