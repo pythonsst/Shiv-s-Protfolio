@@ -7,6 +7,12 @@ import ExperienceColumn from "@/components/ExperienceList";
 import SidebarColumn from "@/components/SidebarColumn";
 import EducationBlock from "@/components/EducationBlock";
 
+/**
+ * Narrowly type document for fonts access (no `any`).
+ * FontFaceSet is part of lib.dom so this is safe.
+ */
+type DocumentWithFonts = Document & { fonts?: FontFaceSet };
+
 export default function ResumePage() {
   useEffect(() => {
     let printLink: HTMLLinkElement | null = null;
@@ -18,18 +24,23 @@ export default function ResumePage() {
         printLink = document.createElement("link");
         printLink.rel = "stylesheet";
         printLink.href = "/resume-print.css";
-        // media=print keeps it from applying to screen; browser will load it for print preview
+        // using media="print" is OK, but some browsers apply print CSS earlier if media="all".
+        // Keep what you had:
         printLink.media = "print";
         printLink.id = "resume-print-link";
         document.head.appendChild(printLink);
       }
 
-      // Ensure web fonts are ready before print preview renders
+      // Ensure web fonts are ready before print preview renders (best-effort).
       try {
-        if ((document as any).fonts && (document as any).fonts.ready) {
-          (document as any).fonts.ready.then(() => void document.body.offsetHeight);
+        const doc = document as DocumentWithFonts;
+        if (doc.fonts && typeof doc.fonts.ready?.then === "function") {
+          // fonts.ready is a Promise — wait then force a reflow
+          doc.fonts.ready.then(() => void document.body.offsetHeight).catch(() => void document.body.offsetHeight);
         }
-      } catch (e) { /* ignore */ }
+      } catch {
+        // ignore any errors here
+      }
     }
 
     function removePrintAssets() {
@@ -42,6 +53,7 @@ export default function ResumePage() {
 
     window.addEventListener("beforeprint", addPrintAssets);
     window.addEventListener("afterprint", removePrintAssets);
+    // Fallback: some browsers don't reliably emit afterprint, so remove when window regains focus.
     window.addEventListener("focus", removePrintAssets);
 
     return () => {
