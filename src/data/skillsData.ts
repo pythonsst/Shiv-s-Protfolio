@@ -18,24 +18,24 @@ const skills: SkillCategory[] = [
 
   {
     title: "Mobile",
-    items: [
-      "React Native",
-      "Android (Kotlin)",
-      "iOS (Swift)",
-      "Flutter (Dart)",
-    ],
+    items: ["React Native", "Android", "iOS", "Flutter"],
   },
   {
     title: "Languages",
     items: [
-      "Java",
-      "Kotlin",
-      "Swift",
-      "Dart",
       "JavaScript",
       "TypeScript",
       "SQL",
+      "Java",
+      "Kotlin",
+      "Dart",
+      "Swift",
     ],
+  },
+
+  {
+    title: "Backend — Node.js / JS",
+    items: ["Node.js", "Express.js", "NestJS", "GraphQL", "gRPC"],
   },
 
   {
@@ -50,11 +50,6 @@ const skills: SkillCategory[] = [
       "JUnit",
       "Mockito",
     ],
-  },
-
-  {
-    title: "Backend — Node.js / JS",
-    items: ["Node.js", "Express.js", "NestJS", "GraphQL", "gRPC"],
   },
 
   {
