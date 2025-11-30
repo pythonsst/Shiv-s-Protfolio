@@ -6,7 +6,7 @@ import { SkillCategory } from "@/data/skillsData";
 
 interface SkillSectionProps {
   categories: SkillCategory[];
-  clamp?: number; // number of pills to show before "show more" per category (0 = show all)
+  clamp?: number;
   layout?: "pills" | "classic";
   compact?: boolean;
 }
@@ -18,20 +18,31 @@ export default function SkillSection({
   compact = false,
 }: SkillSectionProps) {
   const [expanded, setExpanded] = React.useState<Record<string, boolean>>({});
-  const toggle = (key: string) => setExpanded((s) => ({ ...s, [key]: !s[key] }));
+  const toggle = (key: string) =>
+    setExpanded((s) => ({ ...s, [key]: !s[key] }));
 
-  // Classic layout (comma-separated lines)
+  // CLASSIC layout — typography matched to ExperienceList styles
   if (layout === "classic") {
     return (
-      <section aria-labelledby="skillsHeading" className={`skill-section classic ${compact ? "compact" : ""}`}>
-        <h2 id="skillsHeading" className="skills-heading">Technical Skills</h2>
+      <section
+        aria-labelledby="skillsHeading"
+        className={`skill-section classic ${compact ? "compact" : ""}`}
+      >
+        <h2 id="skillsHeading" className="skills-heading">
+          Technical Skills
+        </h2>
 
         <div className="classic-list">
           {categories.map((cat) => {
             const items = cat.items ?? [];
             if (!items || items.length === 0) return null;
+
             return (
-              <div key={cat.title} className="classic-group" aria-label={`${cat.title} skills`}>
+              <div
+                key={cat.title}
+                className="classic-group"
+                aria-label={`${cat.title} skills`}
+              >
                 <div className="classic-title">{cat.title}:</div>
                 <div className="classic-line">{items.join(", ")}</div>
               </div>
@@ -40,48 +51,74 @@ export default function SkillSection({
         </div>
 
         <style jsx>{`
-          .skill-section { padding: 0; }
-          .skills-heading {
-            font-size: var(--size-section);
-            font-weight: 700;
-            margin: 0 0 10px 0;
-            color: var(--text);
+          .skill-section {
+            padding: 0;
           }
 
-          .classic-list { display: flex; flex-direction: column; gap: ${compact ? "8px" : "12px"}; }
+          /* Match Experience .section-title exactly */
+          .skills-heading {
+            font-size: 15px; /* same as .section-title */
+            font-weight: 700;
+            margin: 0 0 12px 0; /* same bottom margin as Experience section-title */
+            color: #0b1220; /* same as Experience section-title color */
+          }
 
-          .classic-group { display: block; }
+          .classic-list {
+            display: flex;
+            flex-direction: column;
+            gap: ${compact ? "8px" : "14px"};
+          }
 
+          .classic-group {
+            display: block;
+          }
+
+          /* Match Experience .title exactly */
           .classic-title {
             font-weight: 700;
-            font-size: calc(var(--size-title));
-            margin-bottom: ${compact ? "2px" : "4px"};
-            color: var(--text);
+            font-size: 15px; /* same as .title */
+            margin-bottom: ${compact ? "2px" : "6px"};
+            color: #0b1220; /* same as .title color */
           }
 
-          /* Use the global body size for classic skill lines so sidebar and body match */
+          /* EXACT match to Experience .bullets text */
           .classic-line {
-            font-size: var(--size-body);
-            color: var(--body);
-            line-height: 1.45;
+            font-size: 13px;
+            line-height: 1.55;
+            color: #6b7280; !important; /* force override */
             margin: 0;
+            font-weight: 400;
             word-break: break-word;
+          }
+          @media (max-width: 720px) {
+            .classic-line {
+              font-size: 13px;
+            } /* keep same on small screens */
           }
 
           @media print {
-            .skills-heading { font-size: 13pt; }
-            .classic-title { font-size: 11pt; }
-            .classic-line { font-size: 10.5pt; color: #000; }
+            .skills-heading {
+              color: #111;
+            }
+            .classic-title {
+              font-size: 11pt;
+            }
+            .classic-line {
+              font-size: 10.5pt;
+              color: #000;
+            }
           }
         `}</style>
       </section>
     );
   }
 
-  // Pills layout (keeps same base size via var(--size-body))
+  // PILLS layout (unchanged)
   return (
     <section aria-labelledby="skillsHeading" className="skill-section">
-      <h2 id="skillsHeading" className="skills-heading">Core Skills</h2>
+      <h2 id="skillsHeading" className="skills-heading">
+        Core Skills
+      </h2>
 
       <div className="skills-grid">
         {categories.map((cat) => {
@@ -95,18 +132,36 @@ export default function SkillSection({
 
               <div className="pills" role="list">
                 {visible.map((skill) => (
-                  <button key={skill} type="button" className="pill" role="listitem" title={skill} tabIndex={0}>
+                  <button
+                    key={skill}
+                    type="button"
+                    className="pill"
+                    role="listitem"
+                    title={skill}
+                    tabIndex={0}
+                  >
                     <span className="dot" aria-hidden />
                     <span className="pill-text">{skill}</span>
                   </button>
                 ))}
+
                 {!showAll && cat.items.length > clamp && (
-                  <button type="button" className="pill more" onClick={() => toggle(cat.title)} aria-expanded={isExpanded}>
+                  <button
+                    type="button"
+                    className="pill more"
+                    onClick={() => toggle(cat.title)}
+                    aria-expanded={isExpanded}
+                  >
                     +{cat.items.length - clamp} more
                   </button>
                 )}
+
                 {showAll && isExpanded && cat.items.length > clamp && (
-                  <button type="button" className="pill more" onClick={() => toggle(cat.title)}>
+                  <button
+                    type="button"
+                    className="pill more"
+                    onClick={() => toggle(cat.title)}
+                  >
                     show less
                   </button>
                 )}
@@ -117,7 +172,9 @@ export default function SkillSection({
       </div>
 
       <style jsx>{`
-        .skill-section { padding: 0; }
+        .skill-section {
+          padding: 0;
+        }
 
         .skills-heading {
           font-size: var(--size-section);
@@ -126,37 +183,42 @@ export default function SkillSection({
           color: var(--text);
         }
 
-        .skills-grid { display: grid; grid-template-columns: 1fr; gap: 18px 24px; }
+        .skills-grid {
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: 18px 24px;
+        }
 
-        .category { display:block; }
+        .category {
+          display: block;
+        }
 
         .cat-title {
           margin: 2px 0 8px 0;
           font-weight: 700;
           font-size: var(--size-title);
           color: var(--text);
-          text-transform: none;
           letter-spacing: -0.01em;
         }
 
         .pills {
-          display:flex;
-          align-items:flex-start;
+          display: flex;
+          align-items: flex-start;
           gap: 8px;
-          flex-wrap:wrap;
+          flex-wrap: wrap;
         }
 
         .pill {
-          display:inline-flex;
-          align-items:center;
-          gap:8px;
-          padding:6px 10px;
-          border-radius:999px;
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          padding: 6px 10px;
+          border-radius: 999px;
           background: rgba(15, 23, 42, 0.03);
-          border: 1px solid rgba(15,23,42,0.03);
+          border: 1px solid rgba(15, 23, 42, 0.03);
           font-size: var(--size-body);
           color: #0f172a;
-          cursor:default;
+          cursor: default;
           user-select: none;
           min-height: 32px;
         }
@@ -170,37 +232,24 @@ export default function SkillSection({
           padding: 4px 6px;
         }
 
-        .pill:hover { transform: translateY(-2px); }
+        .pill:hover {
+          transform: translateY(-2px);
+        }
 
         .dot {
-          width:8px;
-          height:8px;
-          border-radius:50%;
+          width: 8px;
+          height: 8px;
+          border-radius: 50%;
           background: linear-gradient(180deg, #6a8cff, #6f46ff);
-          flex:0 0 8px;
+          flex: 0 0 8px;
         }
 
-        .pill .pill-text { display:inline-block; max-width: 14ch; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
-
-        @media (max-width: 720px) {
-          .pill { padding:5px 8px; font-size:var(--size-body); gap:6px; }
-          .dot { width:6px; height:6px; }
-        }
-
-        @media print {
-          .pills { gap: 6px; }
-          .pill {
-            background: transparent !important;
-            border: none !important;
-            padding: 0 !important;
-            min-height: 0 !important;
-            box-shadow: none !important;
-            color: #111 !important;
-          }
-          .dot { display:none; }
-          .pill.more { color: #111; text-decoration: underline; }
-          .cat-title { font-size: 11pt; }
-          .skills-heading { font-size: 13pt; }
+        .pill .pill-text {
+          display: inline-block;
+          max-width: 14ch;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
         }
       `}</style>
     </section>
