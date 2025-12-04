@@ -40,7 +40,7 @@ export const experiences = [
     org: "Affinidi — Bangalore, India",
     orgUrl: "https://affinidi.com",
     location: "Bangalore, India",
-    period: "Aug 2021 – May 2019",
+    period: "Aug 2019 – May 2022",
     bullets: [
       "Developed decentralized identity applications using React Native with DID-based authentication.",
       "Improved client runtime performance by <strong>25 percent</strong> through Hermes tuning and resource optimization.",
