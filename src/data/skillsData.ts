@@ -13,7 +13,14 @@ export type SkillCategory = {
 const skills: SkillCategory[] = [
   {
     title: "Frontend",
-    items: ["React.js", "Next.js", "TypeScript", "Redux Toolkit"],
+    items: [
+      "React.js",
+      "Next.js",
+      "TypeScript",
+      "Redux Toolkit",
+      "Redux-Saga",
+      "Zustand",
+    ],
   },
 
   {
@@ -25,30 +32,30 @@ const skills: SkillCategory[] = [
     items: [
       "JavaScript",
       "TypeScript",
-      "SQL",
       "Java",
       "Kotlin",
       "Dart",
       "Swift",
+      "C++",
+      "C",
+      "SQL",
     ],
   },
 
   {
     title: "Backend — Node.js / JS",
-    items: ["Node.js", "Express.js", "NestJS", "GraphQL", "gRPC"],
-  },
-
-  {
-    title: "Backend — Java",
     items: [
-      "Spring Boot",
-      "Spring Data (JPA / Hibernate)",
-      "Spring Security",
-      "Microservices",
-      "Maven",
-      "Gradle",
-      "JUnit",
-      "Mockito",
+      "Node.js",
+      "Express.js",
+      "NestJS",
+      "Fastify",
+      "REST API Design",
+      "GraphQL (Apollo Server)",
+      "WebSockets (Socket.IO)",
+      "gRPC",
+      "Prisma ORM",
+      "TypeORM",
+      "Mongoose",
     ],
   },
 
@@ -56,10 +63,9 @@ const skills: SkillCategory[] = [
     title: "Cloud & DevOps",
     items: [
       "AWS (ECS, Lambda, RDS, S3)",
-      "Terraform",
       "Docker",
       "Kubernetes",
-      "CI/CD (GitHub Actions, Jenkins, Fastlane)",
+      "CI/CD (GitHub Actions,Fastlane)",
     ],
   },
 
