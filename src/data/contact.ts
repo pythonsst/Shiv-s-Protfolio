@@ -28,6 +28,7 @@ export const contacts: ContactItem[] = [
 export const profile = {
   name: "Shiv Shankar Tiwari",
   heroSummary:
-    "Senior Software Engineer with <strong>6+ years of experience</strong> building scalable, high-performance mobile and web platforms. I design and deliver <strong>distributed systems</strong>, make <strong>architecture-level decisions</strong>, and lead engineering teams to improve <strong>reliability</strong>, reduce <strong>operational risk</strong>, and accelerate <strong>delivery velocity</strong> at scale.",
+    "Senior Software Engineer with <strong>6+ years of experience</strong> building <strong>high-scale, performance-critical mobile and web systems</strong>. Focused on <strong>architecture ownership</strong>, performance optimization, and <strong>production-grade delivery</strong>.",
 };
+
 
