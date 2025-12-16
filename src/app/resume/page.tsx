@@ -1,223 +1,338 @@
-// src/app/resume/page.tsx
 "use client";
 
-import React, { useEffect } from "react";
-import ResumeHeader from "@/features/resume/components/Header";
-import ExperienceColumn from "@/features/resume/components/Experience";
-import SidebarColumn from "@/features/resume/components/Sidebar";
-import EducationBlock from "@/components/EducationBlock";
-
-/**
- * Narrowly type document for fonts access (no `any`).
- * FontFaceSet is part of lib.dom so this is safe.
- */
-type DocumentWithFonts = Document & { fonts?: FontFaceSet };
+import React from "react";
+import Navigation from "@/components/Navigation";
+import ExperienceItem from "@/components/ExperienceItem";
+import SkillSection from "@/components/SkillSection";
+import ResumeHeader from "@/components/resume/ResumeHeader";
+import ResumeSummary from "@/components/resume/ResumeSummary";
+import ResumeProjects from "@/components/resume/ResumeProjects";
+import ResumeEducation from "@/components/resume/ResumeEducation";
+import ResumeCertifications from "@/components/resume/ResumeCertifications";
+import { resumeData } from "@/data/resumeData";
 
 export default function ResumePage() {
-  useEffect(() => {
-    let printLink: HTMLLinkElement | null = null;
-
-    function addPrintAssets() {
-      document.documentElement.classList.add("resume-print");
-
-      if (!printLink) {
-        printLink = document.createElement("link");
-        printLink.rel = "stylesheet";
-        printLink.href = "/resume-print.css";
-        // using media="print" is OK, but some browsers apply print CSS earlier if media="all".
-        // Keep what you had:
-        printLink.media = "print";
-        printLink.id = "resume-print-link";
-        document.head.appendChild(printLink);
-      }
-
-      // Ensure web fonts are ready before print preview renders (best-effort).
-      try {
-        const doc = document as DocumentWithFonts;
-        if (doc.fonts && typeof doc.fonts.ready?.then === "function") {
-          // fonts.ready is a Promise — wait then force a reflow
-          doc.fonts.ready.then(() => void document.body.offsetHeight).catch(() => void document.body.offsetHeight);
-        }
-      } catch {
-        // ignore any errors here
-      }
-    }
-
-    function removePrintAssets() {
-      document.documentElement.classList.remove("resume-print");
-      if (printLink && printLink.parentNode) {
-        printLink.parentNode.removeChild(printLink);
-        printLink = null;
-      }
-    }
-
-    window.addEventListener("beforeprint", addPrintAssets);
-    window.addEventListener("afterprint", removePrintAssets);
-    // Fallback: some browsers don't reliably emit afterprint, so remove when window regains focus.
-    window.addEventListener("focus", removePrintAssets);
-
-    return () => {
-      window.removeEventListener("beforeprint", addPrintAssets);
-      window.removeEventListener("afterprint", removePrintAssets);
-      window.removeEventListener("focus", removePrintAssets);
-      removePrintAssets();
-    };
-  }, []);
+  // Safety check - ensure data is loaded
+  if (!resumeData) {
+    return (
+      <div style={{ padding: "2rem", textAlign: "center", minHeight: "100vh" }}>
+        <p>Loading resume data...</p>
+      </div>
+    );
+  }
 
   return (
     <>
       <style jsx global>{`
-        /* keep screen styles here unchanged — these are your current styles */
-        @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Source+Serif+Pro:wght@600;700&display=swap");
+        /* Fonts */
+        @import url("https://fonts.googleapis.com/css2?family=Merriweather:wght@700;900&family=Inter:wght@300;400;600;700&display=swap");
 
         :root {
-          --font-sans: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial;
-          --font-serif: "Source Serif Pro", Georgia, serif;
-          --text: #0b1220;
-          --body: #111827;
-          --muted: #6b7280;
-          --accent: #5b21b6;
-          --divider: rgba(11,17,32,0.06);
-          --size-name: 32px;
-          --size-section: 15px;
-          --size-title: 13px;
-          --size-body: 13px;
-          --size-meta: 11.5px;
-          --max-width: 860px;
-          --print-page-margin: 8mm;
+          --resume-bg: #ffffff;
+          --resume-card-bg: #ffffff;
+          --resume-muted: #6b7280;
+          --resume-accent: #2563eb;
+          --resume-accent-2: #7c3aed;
+          --resume-title: #0b1220;
+          --resume-text: #0b1220;
         }
 
-        * { box-sizing: border-box; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; }
-        html,body,#__next { height:100%; }
-        html, body {
-          margin:0; padding:0;
-          font-family: var(--font-sans);
-          font-size: var(--size-body);
-          color: var(--body);
-          background: #ffffff !important;
+        html,
+        body {
+          margin: 0;
+          height: 100%;
+          font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto,
+            "Helvetica Neue", Arial;
+          background: #f7fafc;
+          color: var(--resume-text);
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
         }
 
-        .hero .name {
-          font-family: var(--font-serif);
-          font-size: var(--size-name);
-          font-weight: 600;
-          color: var(--text);
-          margin: 8px 0;
-          line-height: 1.03;
-          text-align: center;
+        /* Ensure visibility */
+        #__next {
+          min-height: 100vh;
         }
 
-        .summary-pill {
-          font-size: var(--size-body);
-          line-height: 1.45;
-          color: var(--body);
-          margin-top: 8px;
-          text-align: left;
-          background: transparent !important;
-          border: none !important;
+        /* Outer wrapper */
+        .resume-wrapper {
+          display: flex;
+          justify-content: center;
+          padding: 90px 20px 20px;
+          min-height: 100vh;
         }
 
-        .contact-row, .contact-item, .contact-link, .contact-icon {
-          font-size: var(--size-meta);
-          color: var(--muted);
+        /* Main container - world-class professional design */
+        .resume-container {
+          width: 100%;
+          max-width: 1100px;
+          background: var(--resume-card-bg);
+          border-radius: 0;
+          overflow: visible;
+          box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12), 0 2px 6px rgba(0, 0, 0, 0.08);
+          border: 1px solid rgba(0, 0, 0, 0.1);
+          margin: 0 auto;
         }
 
-        .section-title, .skills-heading, .marissa-skill-title {
-          font-size: var(--size-section);
+        /* Body grid: 65/35 split for optimal readability - FAANG standard */
+        .resume-body {
+          display: grid;
+          grid-template-columns: 65% 35%;
+          gap: 40px;
+          padding: 32px 40px 40px;
+          align-items: start;
+          position: relative;
+        }
+
+        /* Subtle divider between columns */
+        .resume-body::before {
+          content: "";
+          position: absolute;
+          left: calc(65% + 20px);
+          top: 32px;
+          bottom: 40px;
+          width: 1px;
+          background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.05), transparent);
+          pointer-events: none;
+        }
+
+        /* Section titles - world-class typography */
+        .resume-section-title {
+          font-size: 19px;
           font-weight: 700;
-          color: var(--text);
-          margin: 0 0 6px;
+          color: var(--resume-title);
+          margin: 0 0 20px 0;
+          position: relative;
+          padding-bottom: 14px;
+          letter-spacing: -0.02em;
+          line-height: 1.2;
         }
-        .section-title::after {
+
+        .resume-section-title::after {
           content: "";
           position: absolute;
           left: 0;
-          bottom: -6px;
-          width: 36px;
-          height: 3px;
-          border-radius: 2px;
-          background: linear-gradient(90deg, var(--accent), #6f8ff8);
-        }
-
-        .wrap {
-          display:flex;
-          justify-content:center;
-          padding: 60px 18px 28px;
-        }
-
-        .card {
-          width:100%;
-          max-width: var(--max-width);
-          background: #ffffff;
-          padding: 32px;
-          border: 1px solid rgba(11, 17, 32, 0.12);
-          border-radius: 6px;
-        }
-
-        .body {
-          display: grid;
-          grid-template-columns: 65% 35%;
-          gap: 18px;
-          position: relative;
-          align-items: start;
-          margin-top: 8px;
-        }
-
-        .body::before {
-          content: "";
-          position: absolute;
-          left: calc(65% + 8px);
-          top: 0;
           bottom: 0;
-          width: 1px;
-          background: var(--divider);
+          width: 55px;
+          height: 3.5px;
+          border-radius: 2px;
+          background: linear-gradient(90deg, #2563eb 0%, #7c3aed 100%);
+          box-shadow: 0 2px 4px rgba(37, 99, 235, 0.3);
         }
 
-        .jobs { display:flex; flex-direction:column; gap: 12px; }
+        /* Experience list - optimized spacing */
+        .resume-experience-list {
+          display: flex;
+          flex-direction: column;
+          gap: 28px;
+          margin-top: 12px;
+        }
 
-        .exp { padding: 0; margin: 0; }
-        .exp + .exp { border-top: 1px dashed rgba(11, 17, 32, 0.06); padding-top: 12px; margin-top: 12px; }
+        /* Sidebar - compact professional spacing */
+        .resume-sidebar {
+          display: flex;
+          flex-direction: column;
+          gap: 24px;
+        }
 
-        .sidebar { padding: 0; }
-        .sidebar .skill-section { padding: 0; }
-        .sidebar .skills-heading { margin-bottom: 10px; }
+        /* Subtle background for sidebar sections */
+        .resume-sidebar > * {
+          transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
 
+        .resume-sidebar > *:hover {
+          transform: translateY(-1px);
+        }
+
+        /* Footer */
+        .resume-footer {
+          padding: 12px 28px 18px;
+          text-align: center;
+          color: var(--resume-muted);
+          font-size: 12px;
+        }
+
+        /* Responsive fallback */
         @media (max-width: 980px) {
-          .wrap { padding: 20px 14px 24px; }
-          .card { padding: 20px; }
-          .body { grid-template-columns: 1fr; }
-          .body::before { display: none; }
-          .hero .name { text-align: left; }
+          .resume-wrapper {
+            padding: 90px 12px 12px;
+          }
+          .resume-body {
+            grid-template-columns: 1fr;
+            gap: 18px;
+            padding: 12px;
+          }
+          .resume-name {
+            font-size: 42px;
+          }
         }
 
-        .header-divider {
-          width: 100%;
-          border-bottom: 1px solid rgba(11, 17, 32, 0.08);
-          margin-top: 18px;
-          margin-bottom: 18px;
+        @media (max-width: 640px) {
+          .resume-wrapper {
+            padding: 90px 10px 10px;
+          }
+          .resume-name {
+            font-size: 36px;
+            letter-spacing: -0.02em;
+          }
+          .resume-header {
+            padding: 24px 20px 20px;
+          }
         }
 
-        /* small print-safe defaults retained here but the full print style is in public/resume-print.css */
+        /* Print rules — optimized for printing */
         @media print {
-          @page { margin: var(--print-page-margin); }
-          :root { --accent: #000; --muted: #000; --body: #000; }
-          .wrap { padding: 0; }
-          .body::before { display: none; }
-          .card { border: 1px solid #000 !important; padding: 20px !important; border-radius: 0 !important; }
+          nav,
+          .no-print {
+            display: none !important;
+          }
+
+          * {
+            -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
+            color-adjust: exact !important;
+          }
+
+          body {
+            background: #fff !important;
+            color: #111827 !important;
+          }
+
+          .resume-wrapper {
+            padding: 0 !important;
+          }
+
+          .resume-container {
+            border-radius: 0 !important;
+            width: auto !important;
+            max-width: 100% !important;
+            box-shadow: none !important;
+            background: #fff !important;
+          }
+
+          .resume-body {
+            padding: 8mm 10mm 10mm !important;
+            gap: 8px !important;
+            display: grid !important;
+            grid-template-columns: 65% 35% !important;
+          }
+
+          .resume-body::before {
+            display: none !important;
+          }
+
+          .resume-section-title {
+            font-size: 13pt !important;
+            page-break-after: avoid !important;
+            color: #000 !important;
+          }
+
+          .resume-section-title::after {
+            background: linear-gradient(90deg, #2563eb, #7c3aed) !important;
+            -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
+          }
+
+          .resume-experience-list {
+            gap: 12px !important;
+          }
+
+          .resume-sidebar {
+            gap: 16px !important;
+          }
+
+          .resume-footer {
+            display: none !important;
+          }
+
+          /* Ensure links are visible in print */
+          a {
+            color: #000 !important;
+            text-decoration: none !important;
+          }
+
+          a[href^="http"]:after {
+            content: " (" attr(href) ")";
+            font-size: 9pt;
+            color: #666;
+          }
+
+          @page {
+            margin: 10mm;
+            size: letter;
+          }
+
+          /* Prevent page breaks inside experience items */
+          .exp {
+            page-break-inside: avoid !important;
+            break-inside: avoid !important;
+          }
+
+          /* Ensure sections don't break awkwardly */
+          .resume-sidebar > * {
+            page-break-inside: avoid !important;
+            break-inside: avoid !important;
+          }
+
+          /* Prevent orphaned headings */
+          h1, h2, h3, h4, h5, h6 {
+            page-break-after: avoid !important;
+          }
+
+          /* Keep summary together */
+          .resume-summary-pill {
+            page-break-inside: avoid !important;
+          }
         }
       `}</style>
 
-      <div className="wrap">
-        <article className="card" aria-label="Resume">
-          <ResumeHeader />
-          <div className="header-divider" />
-          <section className="body" aria-label="Resume body">
+      <div className="resume-wrapper">
+        <article className="resume-container" aria-label="Resume">
+          <div className="no-print">
+            <Navigation />
+          </div>
+
+          <ResumeHeader
+            contact={resumeData.contact}
+            summary={resumeData.summary.brief}
+          />
+
+          <section className="resume-body">
+            {/* Left column: 65% - Main content */}
             <div>
-              <ExperienceColumn />
-              <EducationBlock />
+              <ResumeSummary summary={resumeData.summary.detailed} />
+
+              <div style={{ marginTop: 32 }}>
+                <h3 className="resume-section-title">Experience</h3>
+                <div className="resume-experience-list">
+                  {resumeData.experiences.map((exp) => (
+                    <ExperienceItem key={exp.id} {...exp} />
+                  ))}
+                </div>
+              </div>
             </div>
-            <SidebarColumn />
+
+            {/* Right column: 35% - Sidebar */}
+            <aside className="resume-sidebar">
+              <SkillSection categories={resumeData.skills} clamp={6} />
+
+              <ResumeProjects projects={resumeData.projects} />
+
+              <ResumeEducation education={resumeData.education} />
+
+              {resumeData.certifications &&
+                resumeData.certifications.length > 0 && (
+                  <ResumeCertifications
+                    certifications={resumeData.certifications}
+                  />
+                )}
+            </aside>
           </section>
+
+          <div className="resume-footer">
+            Full resume and portfolio available on request — or view my GitHub
+            and LinkedIn profiles above.
+          </div>
         </article>
       </div>
     </>

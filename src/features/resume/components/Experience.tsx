@@ -1,7 +1,7 @@
 // src/components/ExperienceList.tsx
 "use client";
 
-import experiences from "@/data/experiences";
+import { experiences } from "@/data/experiences";
 import React from "react";
 import { FiCalendar, FiMapPin } from "react-icons/fi";
 
@@ -12,7 +12,7 @@ import { FiCalendar, FiMapPin } from "react-icons/fi";
 
 /* ----------------------------- Data (example) ----------------------------- */
 type Experience = {
-  id: string;
+  id?: string;
   title: string;
   org: string;
   orgUrl?: string;
@@ -216,7 +216,7 @@ export default function ExperienceList() {
 
       <div className="jobs">
         {experiences.map((e, idx) => (
-          <React.Fragment key={e.id}>
+          <React.Fragment key={e.id || idx}>
             <ExperienceItem e={e} />
             {/* dashed divider except after last item */}
             {idx < experiences.length - 1 && <div className="divider" aria-hidden="true" />}
