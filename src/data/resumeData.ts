@@ -76,7 +76,7 @@ export interface ResumeData {
 export const resumeData: ResumeData = {
   contact: {
     name: "Shiv Shankar Tiwari",
-    title: "Senior Engineering Manager · Technical Architect",
+    title: "Senior Software Engineer · Mobile & Web Systems",
     email: "pythonsst@gmail.com",
     phone: "+91 7007746087",
     location: "Hyderabad, India",
