@@ -3,7 +3,7 @@
 export const experiences = [
   {
     id: "validus",
-    title: "Deputy Manager — Mobile & Front-End Engineering",
+    title: "Senior Software Engineer",
     org: "Validus Fintech Services Pvt Ltd",
     orgUrl: "https://validusfintech.com",
     location: "Hyderabad, India",
