@@ -27,7 +27,7 @@ export default function Home() {
             </div>
             
             <h1 className="text-center leading-tight">
-              <span className="text-6xl md:text-8xl logo-gradient block mb-6 font-script">
+              <span className="text-6xl md:text-8xl gradient-text block mb-6 font-script">
                 Hello!
               </span>
               <span className="text-2xl md:text-4xl font-bold text-foreground block mb-2">
