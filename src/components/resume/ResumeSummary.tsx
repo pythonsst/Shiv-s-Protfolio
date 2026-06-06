@@ -21,7 +21,7 @@ export default function ResumeSummary({ summary }: ResumeSummaryProps) {
         .resume-section-title {
           font-size: 19px;
           font-weight: 700;
-          color: var(--resume-title, #0b1220);
+          color: var(--resume-title);
           margin: 0 0 20px 0;
           position: relative;
           padding-bottom: 14px;
@@ -37,15 +37,15 @@ export default function ResumeSummary({ summary }: ResumeSummaryProps) {
           width: 55px;
           height: 3.5px;
           border-radius: 2px;
-          background: linear-gradient(90deg, #2563eb 0%, #7c3aed 100%);
-          box-shadow: 0 2px 4px rgba(37, 99, 235, 0.3);
+          background: linear-gradient(90deg, var(--resume-accent) 0%, var(--resume-accent-2) 100%);
+          box-shadow: none;
         }
 
         .resume-summary-content {
           background: transparent;
           border-radius: 6px;
           padding: 0;
-          color: #28364a;
+          color: var(--resume-text);
           line-height: 1.7;
           font-size: 14.5px;
         }

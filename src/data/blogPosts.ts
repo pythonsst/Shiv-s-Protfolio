@@ -1,4 +1,16 @@
-export const blogPosts = [
+export type BlogPost = {
+  id: number;
+  title: string;
+  excerpt: string;
+  date: string;
+  readTime: string;
+  category: string;
+  tags: string[];
+  slug: string;
+  published: boolean;
+};
+
+export const blogPosts: BlogPost[] = [
   {
     id: 1,
     title: "From Startup One-Man Army to Full-Stack Leader: My Journey Building Million-User Apps",
@@ -8,7 +20,7 @@ export const blogPosts = [
     category: "Leadership",
     tags: ["Startup", "Full Stack", "Leadership", "Scaling"],
     slug: "startup-one-man-army-to-leader",
-    published: true
+    published: true,
   },
   {
     id: 2,
@@ -19,7 +31,7 @@ export const blogPosts = [
     category: "Engineering",
     tags: ["Mobile Development", "Performance", "Scaling", "Architecture"],
     slug: "scaling-mobile-apps-100k-downloads",
-    published: true
+    published: true,
   },
   {
     id: 3,
@@ -30,7 +42,7 @@ export const blogPosts = [
     category: "Engineering",
     tags: ["Startup", "Full Stack", "Production", "DevOps"],
     slug: "startup-engineering-one-man-army",
-    published: true
+    published: true,
   },
   {
     id: 4,
@@ -41,9 +53,10 @@ export const blogPosts = [
     category: "Engineering",
     tags: ["Web Development", "React", "TypeScript", "Frontend"],
     slug: "modern-web-development-react-typescript",
-    published: true
+    published: true,
   },
   {
+    // No article body exists for this post yet — unpublished so it does not 404.
     id: 5,
     title: "Backend Development with Node.js & AWS: Building Scalable APIs",
     excerpt: "Comprehensive guide to building robust backend systems using Node.js, Express, and AWS services. Covering API design, database optimization, microservices architecture, and cloud deployment strategies.",
@@ -52,7 +65,7 @@ export const blogPosts = [
     category: "Engineering",
     tags: ["Backend", "Node.js", "AWS", "API Development"],
     slug: "backend-development-nodejs-aws",
-    published: true
+    published: false,
   },
   {
     id: 6,
@@ -63,7 +76,7 @@ export const blogPosts = [
     category: "Engineering",
     tags: ["Full Stack", "React Native", "Node.js", "AWS"],
     slug: "fullstack-development-end-to-end",
-    published: true
+    published: true,
   },
   {
     id: 7,
@@ -74,7 +87,7 @@ export const blogPosts = [
     category: "Leadership",
     tags: ["Leadership", "Engineering Management", "Team Building"],
     slug: "startup-technical-leadership",
-    published: true
+    published: true,
   },
   {
     id: 8,
@@ -85,23 +98,6 @@ export const blogPosts = [
     category: "Engineering",
     tags: ["DevOps", "CI/CD", "Automation", "AWS"],
     slug: "devops-cicd-automation-deployment",
-    published: true
-  }
+    published: true,
+  },
 ];
-
-// Utility functions for working with blog posts
-export const getPublishedPosts = () => {
-  return blogPosts.filter(post => post.published);
-};
-
-export const getPostBySlug = (slug: string) => {
-  return blogPosts.find(post => post.slug === slug);
-};
-
-export const getPostsByCategory = (category: string) => {
-  return blogPosts.filter(post => post.category === category && post.published);
-};
-
-export const getRecentPosts = (limit: number = 3) => {
-  return getPublishedPosts().slice(0, limit);
-};

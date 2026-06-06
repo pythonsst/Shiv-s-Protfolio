@@ -76,7 +76,7 @@ export interface ResumeData {
 export const resumeData: ResumeData = {
   contact: {
     name: "Shiv Shankar Tiwari",
-    title: "Senior Software Engineer · Mobile & Web Systems",
+    title: "Staff Mobile App Engineer",
     email: "pythonsst@gmail.com",
     phone: "+91 7007746087",
     location: "Hyderabad, India",
@@ -86,7 +86,7 @@ export const resumeData: ResumeData = {
 
   summary: {
     brief:
-      "Senior Software Engineer with **6+ years of experience** building **high-scale, performance-critical mobile and web systems**. Focused on **architecture ownership**, performance optimization, and **production-grade delivery**.",
+      "Staff Mobile App Engineer with **7+ years of experience** building **high-scale, performance-critical mobile and web systems**. Focused on **architecture ownership**, performance optimization, and **production-grade delivery**.",
     detailed:
       "I lead engineering organizations through product-focused, pragmatic execution. I specialize in mobile-first consumer products, backend architecture, and developer platforms. My priorities are performance, security, and developer productivity — delivered with measurable business outcomes.",
   },

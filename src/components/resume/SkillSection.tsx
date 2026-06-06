@@ -71,7 +71,7 @@ export default function SkillSection({ categories, clamp = 6 }: SkillSectionProp
           font-size: 19px;
           font-weight: 700;
           margin: 0 0 14px 0;
-          color: var(--resume-title, #0b1220);
+          color: var(--resume-title);
           position: relative;
           padding-bottom: 10px;
           letter-spacing: -0.02em;
@@ -86,8 +86,8 @@ export default function SkillSection({ categories, clamp = 6 }: SkillSectionProp
           width: 55px;
           height: 3.5px;
           border-radius: 2px;
-          background: linear-gradient(90deg, #2563eb 0%, #7c3aed 100%);
-          box-shadow: 0 2px 4px rgba(37, 99, 235, 0.3);
+          background: linear-gradient(90deg, var(--resume-accent) 0%, var(--resume-accent-2) 100%);
+          box-shadow: none;
         }
 
         .skills-grid {
@@ -111,7 +111,7 @@ export default function SkillSection({ categories, clamp = 6 }: SkillSectionProp
           margin: 0 0 8px 0;
           font-weight: 700;
           font-size: 14px;
-          color: var(--resume-title, #0b1220);
+          color: var(--resume-title);
           text-transform: none;
           letter-spacing: -0.01em;
           position: relative;
@@ -126,7 +126,7 @@ export default function SkillSection({ categories, clamp = 6 }: SkillSectionProp
           transform: translateY(-50%);
           width: 3px;
           height: 14px;
-          background: linear-gradient(180deg, #2563eb, #7c3aed);
+          background: linear-gradient(180deg, var(--resume-accent), var(--resume-accent-2));
           border-radius: 2px;
         }
 
@@ -141,7 +141,7 @@ export default function SkillSection({ categories, clamp = 6 }: SkillSectionProp
         .pill {
           display: inline-block;
           font-size: 12.5px;
-          color: #0f172a;
+          color: var(--resume-text);
           font-weight: 500;
           padding: 0;
           margin: 0;
@@ -150,7 +150,7 @@ export default function SkillSection({ categories, clamp = 6 }: SkillSectionProp
         }
 
         .pill.more {
-          color: #2563eb;
+          color: var(--resume-accent);
           font-weight: 600;
           cursor: pointer;
           padding: 0;
@@ -159,7 +159,7 @@ export default function SkillSection({ categories, clamp = 6 }: SkillSectionProp
         }
 
         .pill.more:hover {
-          color: #1d4ed8;
+          color: var(--resume-accent);
         }
 
         /* reduce visual size to make page compact and print friendly */

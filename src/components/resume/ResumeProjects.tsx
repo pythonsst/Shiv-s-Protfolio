@@ -62,7 +62,7 @@ export default function ResumeProjects({ projects }: ResumeProjectsProps) {
         .resume-section-title {
           font-size: 19px;
           font-weight: 700;
-          color: var(--resume-title, #0b1220);
+          color: var(--resume-title);
           margin: 0 0 20px 0;
           position: relative;
           padding-bottom: 14px;
@@ -78,8 +78,8 @@ export default function ResumeProjects({ projects }: ResumeProjectsProps) {
           width: 55px;
           height: 3.5px;
           border-radius: 2px;
-          background: linear-gradient(90deg, #2563eb 0%, #7c3aed 100%);
-          box-shadow: 0 2px 4px rgba(37, 99, 235, 0.3);
+          background: linear-gradient(90deg, var(--resume-accent) 0%, var(--resume-accent-2) 100%);
+          box-shadow: none;
         }
 
         .resume-projects-list {
@@ -94,25 +94,25 @@ export default function ResumeProjects({ projects }: ResumeProjectsProps) {
 
         .resume-project-name {
           font-weight: 700;
-          color: var(--resume-title, #0b1220);
+          color: var(--resume-title);
           margin: 0 0 8px 0;
           font-size: 15px;
           letter-spacing: -0.01em;
         }
 
         .resume-project-link {
-          color: var(--resume-title, #0b1220);
+          color: var(--resume-title);
           text-decoration: none;
           transition: all 0.25s ease;
         }
 
         .resume-project-link:hover {
-          color: var(--resume-accent, #2563eb);
+          color: var(--resume-accent);
           text-decoration: underline;
         }
 
         .resume-project-description {
-          color: var(--resume-muted, #6b7280);
+          color: var(--resume-muted);
           font-size: 13.5px;
           line-height: 1.6;
           margin: 0 0 10px 0;
@@ -121,7 +121,7 @@ export default function ResumeProjects({ projects }: ResumeProjectsProps) {
         .resume-project-highlights {
           margin: 10px 0;
           padding-left: 20px;
-          color: #26323f;
+          color: var(--resume-text);
           font-size: 12.5px;
           line-height: 1.6;
           list-style: none;
@@ -136,7 +136,7 @@ export default function ResumeProjects({ projects }: ResumeProjectsProps) {
           content: "▸";
           position: absolute;
           left: -18px;
-          color: #2563eb;
+          color: var(--resume-accent);
           font-weight: 600;
         }
 
@@ -151,15 +151,15 @@ export default function ResumeProjects({ projects }: ResumeProjectsProps) {
           font-size: 11.5px;
           padding: 5px 10px;
           border-radius: 12px;
-          background: linear-gradient(135deg, rgba(37, 99, 235, 0.08), rgba(124, 58, 237, 0.06));
-          border: 1px solid rgba(37, 99, 235, 0.15);
-          color: #101827;
+          background: var(--resume-chip-bg);
+          border: 1px solid var(--resume-chip-border);
+          color: var(--resume-chip-text);
           font-weight: 500;
           transition: all 0.2s ease;
         }
 
         .resume-tech-tag:hover {
-          background: linear-gradient(135deg, rgba(37, 99, 235, 0.12), rgba(124, 58, 237, 0.1));
+          background: var(--resume-chip-bg-hover);
           transform: translateY(-1px);
         }
 

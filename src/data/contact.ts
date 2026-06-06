@@ -28,7 +28,7 @@ export const contacts: ContactItem[] = [
 export const profile = {
   name: "Shiv Shankar Tiwari",
   heroSummary:
-    "Senior Software Engineer with <strong>6+ years of experience</strong> building <strong>high-scale, performance-critical mobile and web systems</strong>. Focused on <strong>architecture ownership</strong>, performance optimization, and <strong>production-grade delivery</strong>.",
+    "Senior Software Engineer with <strong>7+ years of experience</strong> building <strong>high-scale, performance-critical mobile and web systems</strong>. Focused on <strong>architecture ownership</strong>, performance optimization, and <strong>production-grade delivery</strong>.",
 };
 
 

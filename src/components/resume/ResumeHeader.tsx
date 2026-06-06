@@ -94,7 +94,7 @@ export default function ResumeHeader({ contact, summary }: ResumeHeaderProps) {
           font-family: "Merriweather", serif;
           font-size: 54px;
           font-weight: 700;
-          color: var(--resume-title, #0b1220);
+          color: var(--resume-title);
           margin: 0;
           line-height: 1.15;
           letter-spacing: -0.03em;
@@ -106,7 +106,7 @@ export default function ResumeHeader({ contact, summary }: ResumeHeaderProps) {
 
         .resume-title {
           margin-top: 12px;
-          color: var(--resume-muted, #6b7280);
+          color: var(--resume-muted);
           font-weight: 600;
           font-size: 15px;
           letter-spacing: 0.03em;
@@ -119,23 +119,23 @@ export default function ResumeHeader({ contact, summary }: ResumeHeaderProps) {
           max-width: 1000px;
           padding: 18px 26px;
           border-radius: 10px;
-          background: linear-gradient(135deg, rgba(37, 99, 235, 0.06), rgba(124, 58, 237, 0.05));
-          color: #1f2d3d;
+          background: var(--resume-soft-bg);
+          color: var(--resume-text);
           font-size: 14.5px;
           line-height: 1.75;
-          border: 1px solid rgba(37, 99, 235, 0.12);
-          box-shadow: 0 2px 6px rgba(37, 99, 235, 0.1);
+          border: 1px solid var(--resume-chip-border);
+          box-shadow: none;
           word-wrap: break-word;
         }
 
         .resume-summary-pill :global(strong) {
           font-weight: 700;
-          color: #0b1220;
+          color: var(--resume-title);
         }
 
         .resume-contact-row {
           margin-top: 20px;
-          color: var(--resume-muted, #6b7280);
+          color: var(--resume-muted);
           display: flex;
           gap: 16px;
           justify-content: center;
@@ -150,18 +150,18 @@ export default function ResumeHeader({ contact, summary }: ResumeHeaderProps) {
           display: inline-flex;
           align-items: center;
           gap: 8px;
-          color: var(--resume-muted, #6b7280);
+          color: var(--resume-muted);
           text-decoration: none;
           padding: 3px 0;
         }
 
         .resume-contact-item:hover {
-          color: var(--resume-accent, #2563eb);
+          color: var(--resume-accent);
           text-decoration: underline;
         }
 
         .resume-contact-item:focus {
-          outline: 2px solid var(--resume-accent, #2563eb);
+          outline: 2px solid var(--resume-accent);
           outline-offset: 2px;
           border-radius: 3px;
         }
@@ -178,7 +178,7 @@ export default function ResumeHeader({ contact, summary }: ResumeHeaderProps) {
         }
 
         .separator {
-          color: var(--resume-muted, #6b7280);
+          color: var(--resume-muted);
           opacity: 0.4;
           user-select: none;
         }
