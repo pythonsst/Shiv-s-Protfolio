@@ -4,7 +4,7 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 /* ============================================================
-   THEME TOKENS — cuepilot.ai inspired (warm light + warm dark)
+   THEME TOKENS — warm light + warm dark
    ============================================================ */
 
 /* Light theme (warm cream) */
@@ -29,7 +29,7 @@
   color-scheme: light;
 }
 
-/* Dark theme (faithful cuepilot near-black + cream) */
+/* Dark theme (warm near-black + cream) */
 .dark {
   --background: #0a0a0c;
   --foreground: #fff7e0;

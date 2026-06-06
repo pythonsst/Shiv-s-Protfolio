@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Instrument_Sans, Delicious_Handrawn, Roboto_Mono } from "next/font/google";
 import "./globals.css";
 
-// Avenir is a paid font; Instrument Sans (used by cuepilot's logo) is the free stand-in.
+// Instrument Sans — a clean, free Google font used for body and UI.
 const instrumentSans = Instrument_Sans({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
