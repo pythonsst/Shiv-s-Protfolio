@@ -1,12 +1,12 @@
-import { useMemo } from 'react';
-import { blogPosts, getPublishedPosts } from '@/data/blogPosts';
+import { useMemo } from "react";
+import { blogPosts } from "@/data/blogPosts";
+import { getPublishedPosts } from "@/lib/blog";
 
 export function useBlogPosts() {
   return useMemo(() => {
-    const publishedPosts = getPublishedPosts();
     return {
       allPosts: blogPosts,
-      publishedPosts,
+      publishedPosts: getPublishedPosts(),
     };
   }, []);
 }

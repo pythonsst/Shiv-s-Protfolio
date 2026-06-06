@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Navigation from "@/components/Navigation";
+import Navigation from "@/components/ui/Navigation";
 
 export const metadata: Metadata = {
   title: "Privacy Policy — IgniteKit",

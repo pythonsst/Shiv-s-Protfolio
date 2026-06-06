@@ -102,11 +102,11 @@ export default function ExperienceItem({
               // Process markdown and auto-highlight metrics
               highlightedText = b
                 .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>") // Support markdown bold
-                .replace(/(\d+\.?\d*%|\$\d+[BMK]?|\d+[BMK]?\+|\d+[kK]\+|₹\d+[BMK]?|crore|million|billion|thousand)/gi, '<strong class="metric">$1</strong>')
+                .replace(/(\d+\.?\d*%|\$\d+[BMK]?|\d+[BMK]?\+|\d+[kK]\+|₹\d+[BMK]?)/gi, '<strong class="metric">$1</strong>')
                 .replace(/(\d+\.?\d*x|\d+\.?\d*-fold)/gi, '<strong class="metric">$1</strong>');
             } else {
               // Already has HTML, just add metric highlighting for numbers
-              highlightedText = b.replace(/(\d+\.?\d*%|\$\d+[BMK]?|\d+[BMK]?\+|\d+[kK]\+|₹\d+[BMK]?|crore|million|billion|thousand)/gi, '<strong class="metric">$1</strong>');
+              highlightedText = b.replace(/(\d+\.?\d*%|\$\d+[BMK]?|\d+[BMK]?\+|\d+[kK]\+|₹\d+[BMK]?)/gi, '<strong class="metric">$1</strong>');
             }
             
             return (
@@ -145,7 +145,7 @@ export default function ExperienceItem({
           margin: 0 0 8px 0;
           font-size: var(--title-size);
           font-weight: 700;
-          color: #0b1220;
+          color: var(--resume-title);
           line-height: 1.25;
           letter-spacing: -0.015em;
         }
@@ -157,7 +157,7 @@ export default function ExperienceItem({
         }
 
         .org {
-          color: #2563eb;
+          color: var(--resume-accent);
           font-weight: 600;
           font-size: var(--org-size);
           text-decoration: none;
@@ -166,19 +166,19 @@ export default function ExperienceItem({
         }
 
         .org:hover {
-          color: #1d4ed8;
+          color: var(--resume-accent);
           text-decoration: underline;
           transform: translateX(2px);
         }
 
         .location {
           font-size: var(--meta-size);
-          color: #6b7280;
+          color: var(--resume-muted);
         }
 
         .period {
           flex: 0 0 auto;
-          color: #6b7280;
+          color: var(--resume-muted);
           font-size: var(--meta-size);
           align-self: center;
           white-space: nowrap;
@@ -189,14 +189,14 @@ export default function ExperienceItem({
         .period-below {
           margin-top: 6px;
           font-size: var(--meta-size);
-          color: #6b7280;
+          color: var(--resume-muted);
         }
 
         .bullets {
           margin-top: calc(var(--gap-v) + 8px);
           margin-left: 0;
           padding-left: 24px;
-          color: #26323f;
+          color: var(--resume-text);
           line-height: var(--line-height);
           font-size: var(--bullet-size);
           list-style: none;
@@ -216,7 +216,7 @@ export default function ExperienceItem({
           content: "▸";
           position: absolute;
           left: -22px;
-          color: #2563eb;
+          color: var(--resume-accent);
           font-weight: 700;
           font-size: 1em;
           top: 0;
@@ -225,14 +225,14 @@ export default function ExperienceItem({
 
         .bullets li :global(strong) {
           font-weight: 700;
-          color: #0b1220;
+          color: var(--resume-title);
           letter-spacing: -0.01em;
         }
 
         .bullets li :global(strong.metric) {
-          color: #2563eb;
+          color: var(--resume-accent);
           font-weight: 700;
-          background: linear-gradient(135deg, rgba(37, 99, 235, 0.1), rgba(124, 58, 237, 0.08));
+          background: var(--resume-chip-bg);
           padding: 1px 4px;
           border-radius: 3px;
         }

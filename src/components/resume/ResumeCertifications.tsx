@@ -58,7 +58,7 @@ export default function ResumeCertifications({
         .resume-section-title {
           font-size: 19px;
           font-weight: 700;
-          color: var(--resume-title, #0b1220);
+          color: var(--resume-title);
           margin: 0 0 20px 0;
           position: relative;
           padding-bottom: 14px;
@@ -74,8 +74,8 @@ export default function ResumeCertifications({
           width: 55px;
           height: 3.5px;
           border-radius: 2px;
-          background: linear-gradient(90deg, #2563eb 0%, #7c3aed 100%);
-          box-shadow: 0 2px 4px rgba(37, 99, 235, 0.3);
+          background: linear-gradient(90deg, var(--resume-accent) 0%, var(--resume-accent-2) 100%);
+          box-shadow: none;
         }
 
         .resume-certifications-list {
@@ -91,7 +91,7 @@ export default function ResumeCertifications({
 
         .resume-certification-name {
           font-weight: 600;
-          color: var(--resume-title, #0b1220);
+          color: var(--resume-title);
           text-decoration: none;
           display: inline-block;
           transition: all 0.25s ease;
@@ -99,19 +99,19 @@ export default function ResumeCertifications({
         }
 
         .resume-certification-name:hover {
-          color: var(--resume-accent, #2563eb);
+          color: var(--resume-accent);
           text-decoration: underline;
         }
 
         .resume-certification-details {
-          color: var(--resume-muted, #6b7280);
+          color: var(--resume-muted);
           font-size: 12.5px;
           margin-top: 5px;
           line-height: 1.5;
         }
 
         .resume-certification-separator {
-          color: var(--resume-muted, #6b7280);
+          color: var(--resume-muted);
         }
 
         @media print {

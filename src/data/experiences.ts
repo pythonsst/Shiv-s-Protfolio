@@ -1,7 +1,24 @@
 // data/experiences.ts
-import type { ExperienceItemProps } from "@/components/ExperienceItem";
+import type { ExperienceItemProps } from "@/components/resume/ExperienceItem";
 
 export const experiences: ExperienceItemProps[] = [
+  {
+    id: "cuepilot",
+    title: "Staff Mobile Engineer",
+    org: "CuePilot AI",
+    orgUrl: "https://cuepilot.ai",
+    location: "Kolkata, India",
+    period: "Feb 2026 – Present",
+    bullets: [
+      "Building the mobile experience for a **voice-first, AI-powered preschool management platform** that automates attendance, reports, billing, and parent communication so educators can focus on teaching.",
+      "Designed a scalable, modular mobile architecture for maintainability and rapid, multi-team feature delivery.",
+      "Implemented **EAS Over-the-Air (OTA) updates**, shipping releases instantly without app store review cycles.",
+      "Built an **offline-first architecture** with local storage and sync for reliable use without internet connectivity.",
+      "Integrated **WebSocket-based real-time communication** for live data updates and interactive features.",
+      "Improved app performance, stability, and code quality through optimized components and better state management.",
+    ],
+  },
+
   {
     id: "validus",
     title: "Senior Software Engineer",

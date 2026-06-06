@@ -1,9 +1,9 @@
 "use client";
 
 import React from "react";
-import Navigation from "@/components/Navigation";
-import ExperienceItem from "@/components/ExperienceItem";
-import SkillSection from "@/components/SkillSection";
+import Navigation from "@/components/ui/Navigation";
+import ExperienceItem from "@/components/resume/ExperienceItem";
+import SkillSection from "@/components/resume/SkillSection";
 import ResumeHeader from "@/components/resume/ResumeHeader";
 import ResumeSummary from "@/components/resume/ResumeSummary";
 import ResumeProjects from "@/components/resume/ResumeProjects";
@@ -24,35 +24,67 @@ export default function ResumePage() {
         /* ================= Fonts ================= */
         @import url("https://fonts.googleapis.com/css2?family=Merriweather:wght@700;900&family=Inter:wght@300;400;600;700&display=swap");
 
-        :root {
-          --text: #0b1220;
-          --muted: #6b7280;
-          --accent: #2563eb;
-          --accent-2: #7c3aed;
-        }
-
         html,
         body {
           margin: 0;
           font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto;
-          background: #f7fafc;
-          color: var(--text);
           -webkit-font-smoothing: antialiased;
+        }
+
+        /* ================= Theme tokens (light) ================= */
+        .resume-wrapper {
+          --resume-page-bg: #e9e0cd;
+          --resume-surface: #ffffff;
+          --resume-title: #0b1220;
+          --resume-text: #2b3744;
+          --resume-muted: #6b7280;
+          --resume-accent: #0b7b6e;
+          --resume-accent-2: #c99628;
+          --resume-border: rgba(11, 18, 32, 0.08);
+          --resume-soft-bg: rgba(11, 123, 110, 0.06);
+          --resume-chip-bg: rgba(11, 123, 110, 0.07);
+          --resume-chip-bg-hover: rgba(11, 123, 110, 0.12);
+          --resume-chip-border: rgba(11, 123, 110, 0.16);
+          --resume-chip-text: #0b3d37;
+          --resume-shadow: 0 10px 40px rgba(2, 6, 23, 0.1);
+        }
+
+        /* ================= Theme tokens (dark) ================= */
+        :global(.dark) .resume-wrapper {
+          --resume-page-bg: #0a0a0c;
+          --resume-surface: #16161c;
+          --resume-title: #fff7e0;
+          --resume-text: #d6d0c2;
+          --resume-muted: #a89f8c;
+          --resume-accent: #46b08d;
+          --resume-accent-2: #d9a73a;
+          --resume-border: rgba(255, 255, 255, 0.1);
+          --resume-soft-bg: rgba(70, 176, 141, 0.1);
+          --resume-chip-bg: rgba(70, 176, 141, 0.12);
+          --resume-chip-bg-hover: rgba(70, 176, 141, 0.2);
+          --resume-chip-border: rgba(70, 176, 141, 0.28);
+          --resume-chip-text: #bfe9da;
+          --resume-shadow: 0 16px 50px rgba(0, 0, 0, 0.55);
         }
 
         /* ================= Web Layout ================= */
         .resume-wrapper {
           display: flex;
           justify-content: center;
-          padding: 90px 20px 20px;
+          padding: 90px 20px 40px;
+          background: var(--resume-page-bg);
+          min-height: 100vh;
+          transition: background-color 0.3s ease;
         }
 
         .resume-container {
           width: 100%;
           max-width: 1100px;
-          background: #ffffff;
-          border: 1px solid rgba(0, 0, 0, 0.08);
-          box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+          background: var(--resume-surface);
+          border: 1px solid var(--resume-border);
+          border-radius: 16px;
+          box-shadow: var(--resume-shadow);
+          transition: background-color 0.3s ease, border-color 0.3s ease;
         }
 
         .resume-body {
@@ -66,6 +98,7 @@ export default function ResumePage() {
         .resume-section-title {
           font-size: 18px;
           font-weight: 700;
+          color: var(--resume-title);
           margin-bottom: 16px;
           padding-bottom: 12px;
           position: relative;
@@ -79,7 +112,7 @@ export default function ResumePage() {
           width: 50px;
           height: 3px;
           border-radius: 2px;
-          background: linear-gradient(90deg, var(--accent), var(--accent-2));
+          background: linear-gradient(90deg, var(--resume-accent), var(--resume-accent-2));
         }
 
         .resume-experience-list {
@@ -94,13 +127,6 @@ export default function ResumePage() {
           gap: 20px;
         }
 
-        .resume-footer {
-          text-align: center;
-          font-size: 12px;
-          color: var(--muted);
-          padding: 12px 24px 16px;
-        }
-
         /* ================= Responsive ================= */
         @media (max-width: 980px) {
           .resume-body {
@@ -112,6 +138,25 @@ export default function ResumePage() {
 
         /* ================= PRINT (PDF) ================= */
         @media print {
+          /* Always print on white paper, regardless of the active theme */
+          .resume-wrapper,
+          :global(.dark) .resume-wrapper {
+            --resume-page-bg: #ffffff;
+            --resume-surface: #ffffff;
+            --resume-title: #000000;
+            --resume-text: #111111;
+            --resume-muted: #333333;
+            --resume-accent: #1f5f54;
+            --resume-accent-2: #7a5c12;
+            --resume-border: rgba(0, 0, 0, 0.15);
+            --resume-soft-bg: transparent;
+            --resume-chip-bg: transparent;
+            --resume-chip-bg-hover: transparent;
+            --resume-chip-border: #cccccc;
+            --resume-chip-text: #111111;
+            --resume-shadow: none;
+          }
+
           nav,
           .no-print {
             display: none !important;
@@ -196,19 +241,13 @@ export default function ResumePage() {
           {/* Header + concise IC-aligned brief */}
           <ResumeHeader
             contact={resumeData.contact}
-            summary={
-              "Senior Software Engineer with 6+ years of experience building high-scale, performance-critical mobile and web systems. Focused on architecture ownership, reliability, and production-grade delivery."
-            }
+            summary={resumeData.summary.brief}
           />
 
           <section className="resume-body">
             {/* LEFT COLUMN */}
             <div>
-              <ResumeSummary
-                summary={
-                  "I design and scale high-performance mobile and web systems with a strong focus on architecture ownership, reliability, and developer productivity. I have 6+ years of experience delivering production-grade applications across fintech and consumer platforms."
-                }
-              />
+              <ResumeSummary summary={resumeData.summary.detailed} />
 
               <h3 className="resume-section-title">Experience</h3>
 
@@ -230,8 +269,6 @@ export default function ResumePage() {
               )}
             </aside>
           </section>
-
-          <div className="resume-footer">Full resume and portfolio available on request.</div>
         </article>
       </div>
     </>

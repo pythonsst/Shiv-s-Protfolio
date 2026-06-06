@@ -1,6 +1,7 @@
 "use client";
 
-import Navigation from "@/components/Navigation";
+import Navigation from "@/components/ui/Navigation";
+import BlogCard from "@/components/blog/BlogCard";
 import { useBlogPosts } from "@/hooks/useBlogPosts";
 
 export default function Home() {
@@ -26,7 +27,7 @@ export default function Home() {
             </div>
             
             <h1 className="text-center leading-tight">
-              <span className="text-4xl md:text-5xl font-bold gradient-text block mb-6 font-serif">
+              <span className="text-6xl md:text-8xl gradient-text block mb-6 font-script">
                 Hello!
               </span>
               <span className="text-2xl md:text-4xl font-bold text-foreground block mb-2">
@@ -61,10 +62,10 @@ export default function Home() {
             </div>
             
             <div className="max-w-4xl mx-auto text-center space-y-8">
-              <div className="relative bg-gradient-to-br from-white/90 to-gray-50/50 rounded-2xl p-8 border border-gray-200/50 shadow-sm backdrop-blur-sm">
+              <div className="relative bg-gradient-to-br from-card/90 to-muted/50 rounded-2xl p-8 border border-border/50 shadow-sm backdrop-blur-sm">
                 <div className="max-w-3xl mx-auto">
                   <p className="text-base text-foreground leading-relaxed mb-4">
-                    I&apos;m Shiv, and I&apos;ve been the technical backbone of multiple startups for 6+ years. 
+                    I&apos;m Shiv, and I&apos;ve been the technical backbone of multiple startups for 7+ years. 
                     From a curious kid who loved breaking things to understand how they work, 
                     I&apos;ve become the engineer startups call when they need someone who can build <em>everything</em> from scratch and make it scale.
                   </p>
@@ -93,50 +94,10 @@ export default function Home() {
             </p>
           </div>
           <div className="space-y-8">
-                {publishedPosts.map((post) => (
-              <article key={post.id} className="group">
-                <a href={`/blog/${post.slug}`} className="block bg-white/95 backdrop-blur-sm rounded-2xl p-6 border border-gray-200/50 shadow-sm hover:shadow-md transition-all duration-300 group">
-                  <div className="space-y-4">
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-3">
-                        <span className="px-3 py-1.5 bg-accent/10 text-accent rounded-full font-medium text-xs">
-                          {post.date}
-                        </span>
-                        <span className="text-muted-foreground text-xs">•</span>
-                        <span className="text-muted-foreground text-xs">{post.readTime}</span>
-                      </div>
-                      {post.category && (
-                        <span className="px-2.5 py-1 bg-gray-100 text-gray-600 rounded-full font-medium text-xs uppercase tracking-wide">
-                          {post.category}
-                        </span>
-                      )}
-                    </div>
-                    
-                    <div className="space-y-3">
-                      <h3 className="text-xl md:text-2xl font-bold text-foreground group-hover:text-accent transition-colors cursor-pointer leading-tight">
-                        {post.title}
-                      </h3>
-                      <p className="text-sm text-muted-foreground leading-relaxed">
-                        {post.excerpt}
-                      </p>
-                    </div>
-                    
-                    <div className="flex items-center justify-between pt-4 border-t border-gray-200/30">
-                      <span className="inline-flex items-center gap-1.5 text-accent group-hover:text-accent-hover transition-colors font-medium text-sm">
-                        Read more
-                        <svg className="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                        </svg>
-                      </span>
-                      <div className="w-6 h-6 bg-accent/10 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                        <span className="text-accent text-xs">→</span>
-                      </div>
-                    </div>
-                  </div>
-                </a>
-              </article>
+            {publishedPosts.map((post) => (
+              <BlogCard key={post.id} post={post} />
             ))}
-            </div>
+          </div>
         </section>
 
         {/* Startup Experience Section */}
@@ -157,7 +118,7 @@ export default function Home() {
             
             
             <div className="grid md:grid-cols-3 gap-6 md:gap-8">
-              <div className="bg-white/80 rounded-2xl p-6 md:p-8 border border-gray-200/50 shadow-sm hover:shadow-md transition-all duration-300">
+              <div className="bg-card/80 rounded-2xl p-6 md:p-8 border border-border/50 shadow-sm hover:shadow-md transition-all duration-300">
                 <div className="space-y-4">
                   <div>
                     <h3 className="text-xl font-semibold text-foreground mb-3">Solo Builder</h3>
@@ -166,17 +127,17 @@ export default function Home() {
                       When you&apos;re the only dev, you learn to be resourceful. Fast.
                     </p>
                   </div>
-                  <div className="pt-3 border-t border-gray-200/50">
+                  <div className="pt-3 border-t border-border/50">
                     <div className="flex flex-wrap gap-1.5">
-                      <span className="px-2.5 py-1 bg-gray-100 text-gray-700 rounded-full text-xs font-medium">React Native</span>
-                      <span className="px-2.5 py-1 bg-gray-100 text-gray-700 rounded-full text-xs font-medium">Node.js</span>
-                      <span className="px-2.5 py-1 bg-gray-100 text-gray-700 rounded-full text-xs font-medium">AWS</span>
+                      <span className="px-2.5 py-1 bg-muted text-foreground rounded-full text-xs font-medium">React Native</span>
+                      <span className="px-2.5 py-1 bg-muted text-foreground rounded-full text-xs font-medium">Node.js</span>
+                      <span className="px-2.5 py-1 bg-muted text-foreground rounded-full text-xs font-medium">AWS</span>
                     </div>
                   </div>
                 </div>
               </div>
               
-              <div className="bg-white/80 rounded-2xl p-6 md:p-8 border border-gray-200/50 shadow-sm hover:shadow-md transition-all duration-300">
+              <div className="bg-card/80 rounded-2xl p-6 md:p-8 border border-border/50 shadow-sm hover:shadow-md transition-all duration-300">
                 <div className="space-y-4">
                   <div>
                     <h3 className="text-xl font-semibold text-foreground mb-3">Team Lead</h3>
@@ -185,17 +146,17 @@ export default function Home() {
                       set up processes, and made sure everyone stayed sane during crunch time.
                     </p>
                   </div>
-                  <div className="pt-3 border-t border-gray-200/50">
+                  <div className="pt-3 border-t border-border/50">
                     <div className="flex flex-wrap gap-1.5">
-                      <span className="px-2.5 py-1 bg-gray-100 text-gray-700 rounded-full text-xs font-medium">Mentoring</span>
-                      <span className="px-2.5 py-1 bg-gray-100 text-gray-700 rounded-full text-xs font-medium">Process</span>
-                      <span className="px-2.5 py-1 bg-gray-100 text-gray-700 rounded-full text-xs font-medium">Architecture</span>
+                      <span className="px-2.5 py-1 bg-muted text-foreground rounded-full text-xs font-medium">Mentoring</span>
+                      <span className="px-2.5 py-1 bg-muted text-foreground rounded-full text-xs font-medium">Process</span>
+                      <span className="px-2.5 py-1 bg-muted text-foreground rounded-full text-xs font-medium">Architecture</span>
                     </div>
                   </div>
                 </div>
               </div>
               
-              <div className="bg-white/80 rounded-2xl p-6 md:p-8 border border-gray-200/50 shadow-sm hover:shadow-md transition-all duration-300">
+              <div className="bg-card/80 rounded-2xl p-6 md:p-8 border border-border/50 shadow-sm hover:shadow-md transition-all duration-300">
                 <div className="space-y-4">
                   <div>
                     <h3 className="text-xl font-semibold text-foreground mb-3">Scale Master</h3>
@@ -204,18 +165,18 @@ export default function Home() {
                       The numbers don&apos;t lie - good engineering shows in the results.
                     </p>
                   </div>
-                  <div className="pt-3 border-t border-gray-200/50">
+                  <div className="pt-3 border-t border-border/50">
                     <div className="flex flex-wrap gap-1.5">
-                      <span className="px-2.5 py-1 bg-gray-100 text-gray-700 rounded-full text-xs font-medium">Millions</span>
-                      <span className="px-2.5 py-1 bg-gray-100 text-gray-700 rounded-full text-xs font-medium">90% Faster</span>
-                      <span className="px-2.5 py-1 bg-gray-100 text-gray-700 rounded-full text-xs font-medium">30% Less Crashes</span>
+                      <span className="px-2.5 py-1 bg-muted text-foreground rounded-full text-xs font-medium">Millions</span>
+                      <span className="px-2.5 py-1 bg-muted text-foreground rounded-full text-xs font-medium">90% Faster</span>
+                      <span className="px-2.5 py-1 bg-muted text-foreground rounded-full text-xs font-medium">30% Less Crashes</span>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
             
-            <div className="bg-white/90 rounded-2xl p-8 md:p-12 text-center border border-gray-200/50 shadow-sm">
+            <div className="bg-card/90 rounded-2xl p-8 md:p-12 text-center border border-border/50 shadow-sm">
               <div className="max-w-3xl mx-auto space-y-6">
                 <div className="space-y-4">
                   <h3 className="text-2xl md:text-3xl font-semibold text-foreground">Ready to work together?</h3>
@@ -225,10 +186,10 @@ export default function Home() {
                   </p>
                 </div>
                     <div className="flex flex-wrap gap-4 justify-center pt-4">
-                      <a href="mailto:pythonsst@gmail.com" className="px-8 py-3 bg-foreground text-white rounded-xl font-medium hover:bg-foreground/90 transition-colors duration-300">
+                      <a href="mailto:pythonsst@gmail.com" className="px-8 py-3 bg-accent text-white rounded-xl font-medium hover:bg-accent-hover transition-colors duration-300">
                         Let&apos;s Talk
                       </a>
-                      <a href="/resume" className="px-8 py-3 border-2 border-gray-600 text-gray-700 rounded-xl font-medium hover:bg-gray-600 hover:text-white transition-all duration-300">
+                      <a href="/resume" className="px-8 py-3 border-2 border-accent text-accent rounded-xl font-medium hover:bg-accent hover:text-white transition-all duration-300">
                         View Resume
                       </a>
                     </div>
@@ -253,10 +214,10 @@ export default function Home() {
             </div>
             
             <div className="grid md:grid-cols-2 gap-6">
-              <div className="bg-white/80 rounded-2xl p-6 border border-gray-200/50 shadow-sm hover:shadow-md transition-all duration-300">
+              <div className="bg-card/80 rounded-2xl p-6 border border-border/50 shadow-sm hover:shadow-md transition-all duration-300">
                 <div className="space-y-4">
                   <div className="flex items-center gap-2">
-                    <div className="flex text-gray-400">
+                    <div className="flex text-muted-foreground">
                       {[...Array(5)].map((_, i) => (
                         <svg key={i} className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                           <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
@@ -272,9 +233,9 @@ export default function Home() {
                     Shiv fixed all bugs I knew about and more I did not even know about. My app is now running smooth and ready for the app store.&rdquo;
                   </blockquote>
                   
-                  <div className="flex items-center gap-3 pt-3 border-t border-gray-200/30">
-                    <div className="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center">
-                      <span className="text-gray-600 font-bold text-sm">RM</span>
+                  <div className="flex items-center gap-3 pt-3 border-t border-border/30">
+                    <div className="w-8 h-8 bg-muted rounded-full flex items-center justify-center">
+                      <span className="text-muted-foreground font-bold text-sm">RM</span>
                     </div>
                     <div>
                       <div className="font-semibold text-foreground text-sm">Robert M.</div>
@@ -284,10 +245,10 @@ export default function Home() {
                 </div>
               </div>
 
-              <div className="bg-white/80 rounded-2xl p-6 border border-gray-200/50 shadow-sm hover:shadow-md transition-all duration-300">
+              <div className="bg-card/80 rounded-2xl p-6 border border-border/50 shadow-sm hover:shadow-md transition-all duration-300">
                 <div className="space-y-4">
                   <div className="flex items-center gap-2">
-                    <div className="flex text-gray-400">
+                    <div className="flex text-muted-foreground">
                       {[...Array(5)].map((_, i) => (
                         <svg key={i} className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                           <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
@@ -302,9 +263,9 @@ export default function Home() {
                     Shiv fixed it all within a week! Thanks Shiv... We will work again.&rdquo;
                   </blockquote>
                   
-                  <div className="flex items-center gap-3 pt-3 border-t border-gray-200/30">
-                    <div className="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center">
-                      <span className="text-gray-600 font-bold text-sm">RM</span>
+                  <div className="flex items-center gap-3 pt-3 border-t border-border/30">
+                    <div className="w-8 h-8 bg-muted rounded-full flex items-center justify-center">
+                      <span className="text-muted-foreground font-bold text-sm">RM</span>
                     </div>
                     <div>
                       <div className="font-semibold text-foreground text-sm">Robert M.</div>
@@ -364,7 +325,7 @@ export default function Home() {
             <div className="text-center">
               <p className="text-base text-muted-foreground leading-relaxed max-w-3xl mx-auto">
                 This is where it all started - curiosity, some coding, and a lot of trial and error. 
-                Fast forward 6+ years, and I&apos;m still building stuff, just with better tools and a clearer vision.
+                Fast forward 7+ years, and I&apos;m still building stuff, just with better tools and a clearer vision.
               </p>
             </div>
           </div>
