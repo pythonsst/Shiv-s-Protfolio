@@ -27,7 +27,7 @@ export default function Home() {
             </div>
             
             <h1 className="text-center leading-tight">
-              <span className="text-6xl md:text-8xl gradient-text block mb-6 font-script">
+              <span className="text-6xl md:text-8xl logo-gradient block mb-6 font-script">
                 Hello!
               </span>
               <span className="text-2xl md:text-4xl font-bold text-foreground block mb-2">
@@ -44,19 +44,19 @@ export default function Home() {
             
             {/* Social Links */}
             <div className="flex flex-wrap gap-6 md:gap-8 text-muted-foreground justify-center items-center mt-8 md:mt-10">
-              <a href="https://github.com/pythonsst" target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors duration-300 font-medium text-sm">
+              <a href="https://github.com/pythonsst" target="_blank" rel="noopener noreferrer" className="text-accent underline underline-offset-4 decoration-accent/40 hover:decoration-accent hover:text-accent-hover transition-colors duration-300 font-medium text-sm">
                 GitHub
               </a>
               
-              <a href="https://x.com/Shiv3234" target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors duration-300 font-medium text-sm">
+              <a href="https://x.com/Shiv3234" target="_blank" rel="noopener noreferrer" className="text-accent underline underline-offset-4 decoration-accent/40 hover:decoration-accent hover:text-accent-hover transition-colors duration-300 font-medium text-sm">
                 Twitter
               </a>
               
-              <a href="https://www.linkedin.com/in/mobile-engineer/" target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors duration-300 font-medium text-sm">
+              <a href="https://www.linkedin.com/in/mobile-engineer/" target="_blank" rel="noopener noreferrer" className="text-accent underline underline-offset-4 decoration-accent/40 hover:decoration-accent hover:text-accent-hover transition-colors duration-300 font-medium text-sm">
                 LinkedIn
               </a>
               
-              <a href="https://medium.com/@pythonsst" target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors duration-300 font-medium text-sm">
+              <a href="https://medium.com/@pythonsst" target="_blank" rel="noopener noreferrer" className="text-accent underline underline-offset-4 decoration-accent/40 hover:decoration-accent hover:text-accent-hover transition-colors duration-300 font-medium text-sm">
                 Medium
               </a>
             </div>
@@ -353,19 +353,19 @@ export default function Home() {
               </div>
               
               <div className="flex flex-wrap justify-center items-center gap-6 md:gap-8">
-                <a href="https://github.com/pythonsst" className="text-muted-foreground hover:text-accent transition-colors font-medium text-sm">
+                <a href="https://github.com/pythonsst" className="text-accent underline underline-offset-4 decoration-accent/40 hover:decoration-accent hover:text-accent-hover transition-colors font-medium text-sm">
                   GitHub
                 </a>
                 
-                <a href="https://x.com/Shiv3234" className="text-muted-foreground hover:text-accent transition-colors font-medium text-sm">
+                <a href="https://x.com/Shiv3234" className="text-accent underline underline-offset-4 decoration-accent/40 hover:decoration-accent hover:text-accent-hover transition-colors font-medium text-sm">
                   Twitter
                 </a>
                 
-                <a href="https://www.linkedin.com/in/mobile-engineer/" className="text-muted-foreground hover:text-accent transition-colors font-medium text-sm">
+                <a href="https://www.linkedin.com/in/mobile-engineer/" className="text-accent underline underline-offset-4 decoration-accent/40 hover:decoration-accent hover:text-accent-hover transition-colors font-medium text-sm">
                   LinkedIn
                 </a>
                 
-                <a href="https://medium.com/@pythonsst" className="text-muted-foreground hover:text-accent transition-colors font-medium text-sm">
+                <a href="https://medium.com/@pythonsst" className="text-accent underline underline-offset-4 decoration-accent/40 hover:decoration-accent hover:text-accent-hover transition-colors font-medium text-sm">
                   Medium
                 </a>
               </div>
