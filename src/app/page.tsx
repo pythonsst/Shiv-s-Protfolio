@@ -35,8 +35,8 @@ export default function Home() {
               </span>
               <div className="flex items-center justify-center gap-3 mt-6">
                 <div className="w-6 h-px bg-gradient-to-r from-transparent via-accent to-transparent"></div>
-                <span className="text-base md:text-lg text-muted-foreground font-medium">
-                  mindful engineer & startup warrior
+                <span className="font-sans text-base md:text-lg text-muted-foreground font-medium tracking-normal">
+                  mindful engineer &amp; startup warrior
                 </span>
                 <div className="w-6 h-px bg-gradient-to-r from-transparent via-accent to-transparent"></div>
               </div>
